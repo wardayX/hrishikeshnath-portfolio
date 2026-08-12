@@ -13,19 +13,24 @@ function IntroPrototype() {
   useLayoutEffect(() => {
     const section = sectionRef.current;
     const background = backgroundRef.current;
+    if (!section || !background) {
+      return;
+    }
     const scrollHint =
       section.querySelector<HTMLElement>(
         ".prototype-scroll-hint",
       );
-    if (!section || !background) {
-      return;
-    }
-
-    const ctx = gsap.context(() => {
-      const helloLetters = gsap.utils.toArray<HTMLElement>(
-        ".prototype-letter",
-      );
-
+      
+    let handlePointerMove: ((event: PointerEvent) => void) | undefined;
+    let jumbleWords: HTMLElement[] = [];
+      const ctx = gsap.context(() => {
+        const helloLetters = gsap.utils.toArray<HTMLElement>(
+          ".prototype-letter",
+          );
+        const geometry = gsap.utils.toArray<HTMLElement>(
+            ".brutalist-shape, .brutalist-line",
+          );
+          
       const decoyLetters = gsap.utils.toArray<HTMLElement>(
         ".decoy-letter",
       );
@@ -83,6 +88,11 @@ function IntroPrototype() {
         opacity: 0,
         y: 80,
       });
+
+      gsap.set(geometry, {
+        opacity: 0,
+        scale: 0.96,
+        });
 
       /*
        * =========================================
@@ -329,6 +339,18 @@ function IntroPrototype() {
         2.45,
       );
 
+      timeline.to(
+        geometry,
+        {
+          opacity: 0.22,
+          scale: 1,
+          duration: 1.2,
+          stagger: 0.08,
+          ease: "power3.out",
+        },
+        2.45,
+      );
+
       /*
        * =========================================
        * PHASE 6 — I AM
@@ -340,10 +362,10 @@ function IntroPrototype() {
         {
           opacity: 1,
           y: 0,
-          duration: 0.45,
+          duration: 0.35,
           ease: "power3.out",
         },
-        3.0,
+        2.95,
       );
 
       /*
@@ -351,16 +373,49 @@ function IntroPrototype() {
        * PHASE 7 — NAME
        * =========================================
        */
-
       timeline.to(
         ".prototype-name",
         {
           opacity: 1,
           y: 0,
-          duration: 0.8,
-          ease: "power3.out",
+          duration: 0.05,
+          ease: "none",
         },
-        3.25,
+        3.10,
+      );
+
+      timeline.fromTo(
+        ".prototype-name-line:first-child",
+        {
+          y: 90,
+          opacity: 0,
+          clipPath: "inset(0 0 100% 0)",
+        },
+        {
+          y: 0,
+          opacity: 1,
+          clipPath: "inset(0 0 0% 0)",
+          duration: 0.65,
+          ease: "power4.out",
+        },
+        3.12,
+      );
+      
+      timeline.fromTo(
+        ".prototype-name-last",
+        {
+          y: 120,
+          opacity: 0,
+          clipPath: "inset(0 0 100% 0)",
+        },
+        {
+          y: 0,
+          opacity: 1,
+          clipPath: "inset(0 0 0% 0)",
+          duration: 0.7,
+          ease: "power4.out",
+        },
+        3.28,
       );
 
       /*
@@ -398,9 +453,138 @@ function IntroPrototype() {
           3.35,
         );
       });
+
+      handlePointerMove = (event: PointerEvent) => {
+        const scrollTrigger = ScrollTrigger.getAll().find(
+          (trigger) => trigger.trigger === section,
+        );
+      
+        const progress = scrollTrigger?.progress ?? 0;
+      
+        if (progress < 0.55) {
+          return;
+        }
+      
+        const rect = section.getBoundingClientRect();
+      
+        const mouseX =
+          (event.clientX - rect.left) / rect.width - 0.5;
+      
+        const mouseY =
+          (event.clientY - rect.top) / rect.height - 0.5;
+      
+        geometry.forEach((shape, index) => {
+          const strength = 8 + index * 3;
+      
+          gsap.to(shape, {
+            x: mouseX * strength,
+            y: mouseY * strength * 0.7,
+            rotation:
+              mouseX *
+              (index % 2 === 0 ? 1.5 : -1.5),
+            duration: 0.7,
+            ease: "power3.out",
+            overwrite: true,
+          });
+        });
+      };
+      
+      section.addEventListener(
+        "pointermove",
+        handlePointerMove,
+      );
+      
+      jumbleWords =
+          gsap.utils.toArray<HTMLElement>(
+            ".name-jumble",
+          );
+
+        const shuffleText = (text: string) => {
+          const characters = text.split("");
+
+          for (
+            let i = characters.length - 1;
+            i > 0;
+            i--
+          ) {
+            const j = Math.floor(
+              Math.random() * (i + 1),
+            );
+
+            [
+              characters[i],
+              characters[j],
+            ] = [
+              characters[j],
+              characters[i],
+            ];
+          }
+
+          return characters.join("");
+        };
+
+        jumbleWords.forEach((word) => {
+          let timerIds: number[] = [];
+
+          word.addEventListener("mouseenter", () => {
+            const original =
+              word.dataset.text ?? "";
+
+            timerIds.forEach((id) => {
+              window.clearTimeout(id);
+            });
+
+            timerIds = [];
+
+            const passes = 4;
+            const duration = 250;
+            const interval = duration / passes;
+
+            for (let i = 0; i < passes; i++) {
+              const id = window.setTimeout(() => {
+                word.textContent =
+                  shuffleText(original);
+              }, i * interval);
+
+              timerIds.push(id);
+            }
+
+            const restoreId =
+              window.setTimeout(() => {
+                word.textContent = original;
+              }, duration);
+
+            timerIds.push(restoreId);
+          });
+
+          word.addEventListener("mouseleave", () => {
+            const original =
+              word.dataset.text ?? "";
+
+            timerIds.forEach((id) => {
+              window.clearTimeout(id);
+            });
+
+            timerIds = [];
+
+            word.textContent = original;
+          });
+        });
+
     }, section);
 
     return () => {
+      if (handlePointerMove) {
+        section.removeEventListener(
+          "pointermove",
+          handlePointerMove,
+        );
+      }
+      jumbleWords.forEach((word) => {
+        word.textContent =
+          word.dataset.text ?? "";
+      });
+    
       ctx.revert();
     };
   }, []);
@@ -445,23 +629,40 @@ function IntroPrototype() {
           </div>
 
         </div>
-
+        <div
+              className="brutalist-background"
+              aria-hidden="true"
+            >
+              <div className="brutalist-shape shape-one" />
+              <div className="brutalist-shape shape-two" />
+              <div className="brutalist-shape shape-three" />
+              <div className="brutalist-line line-one" />
+              <div className="brutalist-line line-two" />
+        </div>
 
         {/* I AM */}
-        <div className="prototype-iam">
+        <div className="prototype-iam name-jumble" data-text="I AM">
           I AM
         </div>
 
 
         {/* NAME */}
         <div className="prototype-name">
-          <div className="prototype-name-line">
+
+          <div
+            className="prototype-name-line name-jumble"
+            data-text="HRISHIKESH"
+          >
             HRISHIKESH
           </div>
 
-          <div className="prototype-name-line prototype-name-last">
+          <div
+            className="prototype-name-line prototype-name-last name-jumble"
+            data-text="NATH"
+          >
             NATH
           </div>
+
         </div>
 
 

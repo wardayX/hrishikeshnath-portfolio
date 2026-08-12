@@ -290,6 +290,8 @@ body {
    NAME
 ========================================================= */
 
+
+
 .prototype-name {
   position: absolute;
 
@@ -338,6 +340,21 @@ body {
   transform: scaleX(1.25) scaleY(1.6);
 
   transform-origin: left top;
+
+  will-change:
+    transform,
+    clip-path,
+    opacity;
+}
+
+.name-jumble {
+  overflow: hidden;
+  cursor: default;
+  user-select: none;
+}
+
+.prototype-name-last {
+  margin-top: 0.47em;
 }
 
 .prototype-name-last {
@@ -373,4 +390,90 @@ body {
   .prototype-name-last {
     margin-top: 0.35em;
   }
+}
+
+/* =========================================================
+   BRUTALIST BACKGROUND
+========================================================= */
+
+.brutalist-background {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  z-index: 2;
+}
+
+.brutalist-shape,
+.brutalist-line {
+  position: absolute;
+
+  opacity: 0;
+
+  z-index: 3;
+
+  border: 2px solid #0a0a0a;
+
+  transform-origin: center center;
+
+  will-change:
+    transform,
+    opacity;
+}
+.shape-one {
+  width: 340px;
+  height: 220px;
+
+  top: 8%;
+  right: -100px;
+
+  transform: rotate(-8deg);
+}
+
+.shape-two {
+  width: 180px;
+  height: 420px;
+
+  right: 18%;
+  bottom: -180px;
+
+  transform: rotate(14deg);
+}
+
+.shape-three {
+  width: 220px;
+  height: 220px;
+
+  right: -70px;
+  top: 48%;
+
+  transform: rotate(45deg);
+}
+
+.line-one {
+  width: 38vw;
+  height: 1px;
+
+  right: 0;
+  top: 34%;
+
+  background: #0a0a0a;
+  border: 0;
+}
+
+.line-two {
+  width: 28vw;
+  height: 1px;
+
+  right: 5%;
+  bottom: 19%;
+
+  background: #0a0a0a;
+  border: 0;
 }
