@@ -77,6 +77,57 @@ body {
 }
 
 /* =========================================================
+   SCROLL HINT
+========================================================= */
+
+.prototype-scroll-hint {
+  position: absolute;
+
+  right: 32px;
+  bottom: 28px;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  color: #ffffff;
+
+  font-family: "New Title", sans-serif;
+
+  font-size: 11px;
+  font-weight: 500;
+
+  letter-spacing: 0.04em;
+
+  z-index: 10;
+
+  pointer-events: none;
+
+  transition:
+    opacity 0.3s ease,
+    color 0.3s ease;
+}
+
+.prototype-scroll-arrow {
+  display: inline-block;
+
+  font-size: 18px;
+
+  animation: scrollHint 2s ease-in-out infinite;
+}
+
+@keyframes scrollHint {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(4px);
+  }
+}
+
+/* =========================================================
    HELLO STAGE
 ========================================================= */
 
@@ -99,38 +150,6 @@ body {
    DECOY HELLO
 ========================================================= */
 
-.prototype-decoy-hello {
-  position: absolute;
-
-  top: 0;
-  left: 0;
-
-  margin: 0;
-
-  font-family: "New Title", sans-serif;
-
-  font-size: clamp(
-    150px,
-    21vw,
-    360px
-  );
-
-  font-weight: 700;
-
-  line-height: 0.75;
-
-  letter-spacing: -0.02em;
-
-  color: #ffffff;
-
-  white-space: nowrap;
-
-  transform-origin: center center;
-
-  opacity: 0;
-
-  z-index: 2;
-}
 
 
 /* =========================================================

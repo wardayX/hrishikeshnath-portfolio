@@ -13,7 +13,10 @@ function IntroPrototype() {
   useLayoutEffect(() => {
     const section = sectionRef.current;
     const background = backgroundRef.current;
-
+    const scrollHint =
+      section.querySelector<HTMLElement>(
+        ".prototype-scroll-hint",
+      );
     if (!section || !background) {
       return;
     }
@@ -128,6 +131,7 @@ function IntroPrototype() {
           duration: 0.08,
           ease: "power2.out",
         });
+        
 
       /*
        * Seamless handoff:
@@ -180,6 +184,18 @@ function IntroPrototype() {
        * =========================================
        */
 
+      if (scrollHint) {
+        timeline.to(
+          scrollHint,
+          {
+            opacity: 0,
+            duration: 0.2,
+            ease: "power2.out",
+          },
+          0.15,
+        );
+      }
+      
       timeline.to({}, {
         duration: 0.35,
       });
@@ -399,15 +415,10 @@ function IntroPrototype() {
         className="prototype-background"
       />
 
-      <div className="prototype-content">
+        <div className="prototype-content">
 
-        {/* =====================================
-            HELLO STAGE
-        ===================================== */}
-
+        {/* HELLO STAGE */}
         <div className="hello-stage">
-
-          {/* ONE-TIME DECOY */}
 
           <div className="prototype-decoy-hello">
             {"HELLO.".split("").map((letter, index) => (
@@ -419,8 +430,6 @@ function IntroPrototype() {
               </span>
             ))}
           </div>
-
-          {/* REAL SCROLL-CONTROLLED HELLO */}
 
           <div className="prototype-real-hello">
             <div className="prototype-word">
@@ -437,20 +446,15 @@ function IntroPrototype() {
 
         </div>
 
-        {/* =====================================
-            I AM
-        ===================================== */}
 
+        {/* I AM */}
         <div className="prototype-iam">
           I AM
         </div>
 
-        {/* =====================================
-            NAME
-        ===================================== */}
 
+        {/* NAME */}
         <div className="prototype-name">
-
           <div className="prototype-name-line">
             HRISHIKESH
           </div>
@@ -458,10 +462,17 @@ function IntroPrototype() {
           <div className="prototype-name-line prototype-name-last">
             NATH
           </div>
-
         </div>
 
-      </div>
+
+        {/* SCROLL HINT — IMPORTANT:
+            outside hello-stage */}
+        <div className="prototype-scroll-hint">
+          <span>SCROLL TO EXPLORE</span>
+          <span className="prototype-scroll-arrow">↓</span>
+        </div>
+
+        </div>
     </section>
   );
 }
