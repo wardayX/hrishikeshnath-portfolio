@@ -1,0 +1,249 @@
+@font-face {
+  font-family: "New Title";
+  src: url("/fonts/NewTitle/Fonts/WEB/fonts/NewTitle-Bold.woff2")
+    format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  font-family: "New Title", sans-serif;
+  color: #ffffff;
+  background: #000000;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  width: 100%;
+  min-height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scrollbar-width: none;
+}
+
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  display: none;
+}
+
+body {
+  overflow-x: hidden;
+  background: #000000;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+
+/* =========================================================
+   PROTOTYPE
+========================================================= */
+
+.prototype-section {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.prototype-background {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  background: #000000;
+  z-index: 0;
+}
+
+.prototype-content {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 1;
+}
+
+
+/* =========================================================
+   HELLO
+========================================================= */
+
+.prototype-word {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  display: flex;
+
+  transform: translate(-50%, -50%);
+
+  font-family: "New Title", sans-serif;
+
+  font-size: clamp(
+    150px,
+    21vw,
+    360px
+  );
+
+  font-weight: 700;
+
+  line-height: 0.75;
+  letter-spacing: -0.02em;
+
+  color: #ffffff;
+
+  white-space: nowrap;
+
+  z-index: 5;
+}
+
+.prototype-letter {
+  display: inline-block;
+
+  position: relative;
+
+  opacity: 1;
+
+  transform-origin: center center;
+
+  will-change: transform;
+}
+
+
+/* =========================================================
+   I AM
+========================================================= */
+
+.prototype-iam {
+  position: absolute;
+
+  left: 36px;
+  top: 3vh;
+
+  color: #0a0a0a;
+
+  font-family: "New Title", sans-serif;
+
+  font-size: clamp(
+    42px,
+    2vw,
+    64px
+  );
+
+  font-weight: 500;
+
+  line-height: 1;
+  letter-spacing: -0.02em;
+
+  opacity: 0;
+
+  will-change:
+    transform,
+    opacity;
+
+  z-index: 6;
+}
+
+
+/* =========================================================
+   NAME
+========================================================= */
+
+.prototype-name {
+  position: absolute;
+
+  left: 30px;
+  top: 10vh;
+
+  width: 70vw;
+
+  color: #0a0a0a;
+
+  font-family: "New Title", sans-serif;
+
+  font-size: clamp(
+    160px,
+    21vw,
+    220px
+  );
+
+  font-weight: 700;
+
+  line-height: 0.78;
+  letter-spacing: 0;
+
+  text-transform: uppercase;
+
+  white-space: nowrap;
+
+  opacity: 0;
+
+  will-change:
+    transform,
+    opacity;
+
+  z-index: 6;
+}
+
+.prototype-name-line {
+  display: block;
+
+  width: max-content;
+
+  margin: 0;
+
+  white-space: nowrap;
+
+  transform: scaleX(1.25) scaleY(1.6);
+
+  transform-origin: left top;
+}
+
+.prototype-name-last {
+  margin-top: 0.47em;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+  .prototype-iam {
+    left: 18px;
+    top: 13vh;
+
+    font-size: 28px;
+  }
+
+  .prototype-name {
+    left: 18px;
+    top: 20vh;
+
+    width: calc(100vw - 36px);
+
+    font-size: 21vw;
+  }
+
+  .prototype-name-line {
+    transform: scaleX(1.05) scaleY(1.3);
+  }
+
+  .prototype-name-last {
+    margin-top: 0.35em;
+  }
+}
