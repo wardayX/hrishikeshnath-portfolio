@@ -1,8 +1,14 @@
 import { useLayoutEffect, useRef } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { ScrollToPlugin } from "gsap/ScrollToPlugin";
 
-gsap.registerPlugin(ScrollTrigger);
+import Projects from "./Projects";
+
+gsap.registerPlugin(
+  ScrollTrigger,
+  ScrollToPlugin,
+);
 
 const statements = [
   {
@@ -16,6 +22,7 @@ const statements = [
     ],
     layout: "left",
   },
+
   {
     lines: [
       "I LIKE ELECTRONICS—",
@@ -27,6 +34,7 @@ const statements = [
     ],
     layout: "wide",
   },
+
   {
     lines: [
       "SOMEWHERE BETWEEN",
@@ -38,6 +46,7 @@ const statements = [
     ],
     layout: "center",
   },
+
   {
     lines: [
       "I LIKE AI.",
@@ -46,6 +55,7 @@ const statements = [
     ],
     layout: "right",
   },
+
   {
     lines: [
       "THIS IS SOME OF WHAT",
@@ -68,141 +78,209 @@ const hoverFonts = [
 ];
 
 function Introduction() {
-  const sectionRef = useRef<HTMLElement | null>(null);
+  const sectionRef =
+    useRef<HTMLElement | null>(null);
 
   useLayoutEffect(() => {
-    const section = sectionRef.current;
+    const section =
+      sectionRef.current;
 
     if (!section) {
       return;
     }
 
-    const hoverCleanups: Array<() => void> = [];
+    let projectScrollPosition = 0;
+
+    const hoverCleanups:
+      Array<() => void> = [];
+
+    /* =========================================
+       ELEMENT REFERENCES OUTSIDE CONTEXT
+    ========================================= */
+
+    const projectCue =
+      section.querySelector<HTMLElement>(
+        ".intro-project-cue",
+      );
 
     const geometryElements =
-    gsap.utils.toArray<HTMLElement>(
-      ".intro-geo-shape, .intro-geo-line",
+      gsap.utils.toArray<HTMLElement>(
+        ".intro-geo-shape, .intro-geo-line",
+      );
+
+    /* =========================================
+       GEOMETRY POINTER INTERACTION
+    ========================================= */
+
+    const handleIntroPointerMove = (
+      event: PointerEvent,
+    ) => {
+      const rect =
+        section.getBoundingClientRect();
+
+      const mouseX =
+        (event.clientX - rect.left) /
+          rect.width -
+        0.5;
+
+      const mouseY =
+        (event.clientY - rect.top) /
+          rect.height -
+        0.5;
+
+      geometryElements.forEach(
+        (element, index) => {
+          const baseRotation =
+            Number(
+              element.dataset.rotation ??
+                "0",
+            );
+
+          const strengthX =
+            6 + index * 5;
+
+          const strengthY =
+            4 + index * 2.5;
+
+          const rotationStrength =
+            0.8 + index * 0.35;
+
+          gsap.to(element, {
+            x:
+              mouseX *
+              strengthX,
+
+            y:
+              mouseY *
+              strengthY,
+
+            rotation:
+              baseRotation +
+              mouseX *
+                rotationStrength,
+
+            duration: 0.8,
+
+            ease: "power3.out",
+
+            overwrite: true,
+          });
+        },
+      );
+    };
+
+    const handleIntroPointerLeave =
+      () => {
+        geometryElements.forEach(
+          (element) => {
+            const baseRotation =
+              Number(
+                element.dataset
+                  .rotation ?? "0",
+              );
+
+            gsap.to(element, {
+              x: 0,
+              y: 0,
+              rotation:
+                baseRotation,
+
+              duration: 0.9,
+
+              ease: "power3.out",
+            });
+          },
+        );
+      };
+
+    /* =========================================
+       SELECTED WORK CLICK
+    ========================================= */
+
+    const handleProjectCueClick =
+      () => {
+        const trigger =
+          ScrollTrigger.getById(
+            "introductionScroll",
+          );
+
+        if (!trigger) {
+          return;
+        }
+
+        const timelineDuration =
+          trigger.animation?.duration();
+
+        if (
+          !timelineDuration ||
+          projectScrollPosition <= 0
+        ) {
+          return;
+        }
+
+        const targetScroll =
+          trigger.start +
+          (
+            projectScrollPosition /
+            timelineDuration
+          ) *
+            (
+              trigger.end -
+              trigger.start
+            );
+
+        gsap.to(window, {
+          duration: 1.15,
+
+          ease: "power3.inOut",
+
+          scrollTo:
+            targetScroll,
+        });
+      };
+
+    section.addEventListener(
+      "pointermove",
+      handleIntroPointerMove,
     );
 
-const handleIntroPointerMove = (
-  event: PointerEvent,
-) => {
-  const rect =
-    section.getBoundingClientRect();
+    section.addEventListener(
+      "pointerleave",
+      handleIntroPointerLeave,
+    );
 
-  const mouseX =
-    (event.clientX - rect.left) /
-      rect.width -
-    0.5;
+    /* =========================================
+       GSAP CONTEXT
+    ========================================= */
 
-  const mouseY =
-    (event.clientY - rect.top) /
-      rect.height -
-    0.5;
+    const ctx = gsap.context(() => {
+      /* =======================================
+         ELEMENTS
+      ======================================= */
 
-  geometryElements.forEach(
-    (element, index) => {
-      const baseRotation =
-        Number(
-          element.dataset.rotation ??
-            "0",
+      const panels =
+        gsap.utils.toArray<HTMLElement>(
+          ".intro-panel",
         );
 
-      /*
-       * Each element reacts differently.
-       * Objects deeper in the composition
-       * move less.
-       */
-
-      const strengthX =
-        6 + index * 5;
-
-      const strengthY =
-        4 + index * 2.5;
-
-      const rotationStrength =
-        0.8 + index * 0.35;
-
-      gsap.to(element, {
-        x:
-          mouseX *
-          strengthX,
-
-        y:
-          mouseY *
-          strengthY,
-
-        rotation:
-          baseRotation +
-          mouseX *
-            rotationStrength,
-
-        duration: 0.8,
-
-        ease: "power3.out",
-
-        overwrite: true,
-      });
-    },
-  );
-};
-
-const handleIntroPointerLeave = () => {
-  geometryElements.forEach(
-    (element) => {
-      const baseRotation =
-        Number(
-          element.dataset.rotation ??
-            "0",
+      const projectTrack =
+        section.querySelector<HTMLElement>(
+          ".projects-track",
         );
 
-      gsap.to(element, {
-        x: 0,
-        y: 0,
-        rotation: baseRotation,
+      const projectStage =
+        section.querySelector<HTMLElement>(
+          ".projects-stage",
+        );
 
-        duration: 0.9,
-
-        ease: "power3.out",
-      });
-    },
-  );
-};
-section.addEventListener(
-  "pointermove",
-  handleIntroPointerMove,
-);
-
-section.addEventListener(
-  "pointerleave",
-  handleIntroPointerLeave,
-);
-
-const ctx = gsap.context(() => {
-  const panels =
-    gsap.utils.toArray<HTMLElement>(
-      ".intro-panel",
-    );
-
-  const projectCue =
-    section.querySelector<HTMLElement>(
-      ".intro-project-cue",
-    );
-      /*
-       * =========================================
-       * HOVER TYPOGRAPHY
-       * =========================================
-       */
+      /* =======================================
+         HOVER TYPOGRAPHY
+      ======================================= */
 
       const hoverWords =
         gsap.utils.toArray<HTMLElement>(
           ".intro-hover-word",
         );
-
-      /*
-       * Shuffle characters while keeping
-       * spaces in their original positions.
-       */
 
       const shuffleText = (
         text: string,
@@ -210,13 +288,17 @@ const ctx = gsap.context(() => {
         const characters =
           text.split("");
 
-        const movableIndices: number[] =
-          [];
+        const movableIndices:
+          number[] = [];
 
         characters.forEach(
           (character, index) => {
-            if (character !== " ") {
-              movableIndices.push(index);
+            if (
+              character !== " "
+            ) {
+              movableIndices.push(
+                index,
+              );
             }
           },
         );
@@ -253,234 +335,222 @@ const ctx = gsap.context(() => {
         return characters.join("");
       };
 
-      hoverWords.forEach((word) => {
-        const base =
-          word.querySelector<HTMLElement>(
-            ".intro-word-base",
-          );
-
-        const hover =
-          word.querySelector<HTMLElement>(
-            ".intro-word-hover",
-          );
-
-        if (!base || !hover) {
-          return;
-        }
-
-        const original =
-          word.dataset.text ?? "";
-
-        let currentFont = "";
-
-        let timerIds: number[] = [];
-
-        const clearTimers = () => {
-          timerIds.forEach((id) => {
-            window.clearTimeout(id);
-          });
-
-          timerIds = [];
-        };
-
-        const restore = () => {
-          clearTimers();
-
-          hover.textContent =
-            original;
-
-          gsap.killTweensOf([
-            base,
-            hover,
-          ]);
-
-          gsap.set(base, {
-            opacity: 1,
-          });
-
-          gsap.set(hover, {
-            opacity: 0,
-            scaleX: 1,
-            transformOrigin:
-              "left center",
-          });
-        };
-
-        const handleEnter = () => {
-          clearTimers();
-
-          /*
-           * Don't immediately repeat the
-           * same font if possible.
-           */
-
-          const availableFonts =
-            hoverFonts.filter(
-              (font) =>
-                font !== currentFont,
+      hoverWords.forEach(
+        (word) => {
+          const base =
+            word.querySelector<HTMLElement>(
+              ".intro-word-base",
             );
 
-          currentFont =
-            availableFonts.length > 0
-              ? availableFonts[
+          const hover =
+            word.querySelector<HTMLElement>(
+              ".intro-word-hover",
+            );
+
+          if (!base || !hover) {
+            return;
+          }
+
+          const original =
+            word.dataset.text ?? "";
+
+          let currentFont = "";
+
+          let timerIds: number[] =
+            [];
+
+          const clearTimers = () => {
+            timerIds.forEach(
+              (id) => {
+                window.clearTimeout(
+                  id,
+                );
+              },
+            );
+
+            timerIds = [];
+          };
+
+          const restore = () => {
+            clearTimers();
+
+            hover.textContent =
+              original;
+
+            gsap.killTweensOf([
+              base,
+              hover,
+            ]);
+
+            gsap.set(base, {
+              opacity: 1,
+            });
+
+            gsap.set(hover, {
+              opacity: 0,
+              scaleX: 1,
+              transformOrigin:
+                "left center",
+            });
+          };
+
+          const handleEnter =
+            () => {
+              clearTimers();
+
+              const availableFonts =
+                hoverFonts.filter(
+                  (font) =>
+                    font !==
+                    currentFont,
+                );
+
+              currentFont =
+                availableFonts[
                   Math.floor(
                     Math.random() *
                       availableFonts.length,
                   )
-                ]
-              : hoverFonts[
-                  Math.floor(
-                    Math.random() *
-                      hoverFonts.length,
-                  )
                 ];
 
-          hover.style.fontFamily =
-            `"${currentFont}", sans-serif`;
+              hover.style.fontFamily =
+                `"${currentFont}", sans-serif`;
 
-          hover.textContent =
-            original;
+              hover.textContent =
+                original;
 
-          gsap.killTweensOf([
-            base,
-            hover,
-          ]);
+              gsap.killTweensOf([
+                base,
+                hover,
+              ]);
 
-          /*
-           * Fit the alternate font to
-           * the available text region.
-           */
-
-          requestAnimationFrame(() => {
-            const copy =
-              word.closest<HTMLElement>(
-                ".intro-copy",
-              );
-
-            if (!copy) {
-              return;
-            }
-
-            const availableWidth =
-              copy.getBoundingClientRect()
-                .width;
-
-            const actualWidth =
-              hover.scrollWidth;
-
-            let fitScale = 1;
-
-            if (
-              actualWidth >
-              availableWidth
-            ) {
-              fitScale =
-                availableWidth /
-                actualWidth;
-            }
-
-            gsap.set(hover, {
-              scaleX: fitScale,
-              transformOrigin:
-                "left center",
-            });
-
-            gsap.to(base, {
-              opacity: 0,
-              duration: 0.06,
-              ease: "none",
-            });
-
-            gsap.to(hover, {
-              opacity: 1,
-              duration: 0.06,
-              ease: "none",
-            });
-          });
-
-          /*
-           * Brief character jumble.
-           */
-
-          const passes = 4;
-
-          const interval = 55;
-
-          for (
-            let i = 0;
-            i < passes;
-            i++
-          ) {
-            const id =
-              window.setTimeout(
+              requestAnimationFrame(
                 () => {
-                  hover.textContent =
-                    shuffleText(
-                      original,
+                  const copy =
+                    word.closest<HTMLElement>(
+                      ".intro-copy",
                     );
+
+                  if (!copy) {
+                    return;
+                  }
+
+                  const availableWidth =
+                    copy.getBoundingClientRect()
+                      .width;
+
+                  const actualWidth =
+                    hover.scrollWidth;
+
+                  let fitScale = 1;
+
+                  if (
+                    actualWidth >
+                    availableWidth
+                  ) {
+                    fitScale =
+                      availableWidth /
+                      actualWidth;
+                  }
+
+                  gsap.set(hover, {
+                    scaleX:
+                      fitScale,
+
+                    transformOrigin:
+                      "left center",
+                  });
+
+                  gsap.to(base, {
+                    opacity: 0,
+                    duration:
+                      0.06,
+                    ease: "none",
+                  });
+
+                  gsap.to(hover, {
+                    opacity: 1,
+                    duration:
+                      0.06,
+                    ease: "none",
+                  });
                 },
-                i * interval,
               );
 
-            timerIds.push(id);
-          }
+              const passes = 4;
+              const interval = 55;
 
-          /*
-           * Settle back to the correct
-           * phrase while keeping the
-           * alternate font.
-           */
+              for (
+                let i = 0;
+                i < passes;
+                i++
+              ) {
+                const id =
+                  window.setTimeout(
+                    () => {
+                      hover.textContent =
+                        shuffleText(
+                          original,
+                        );
+                    },
+                    i * interval,
+                  );
 
-          const finalTextId =
-            window.setTimeout(
-              () => {
-                hover.textContent =
-                  original;
-              },
-              passes * interval,
-            );
+                timerIds.push(id);
+              }
 
-          timerIds.push(
-            finalTextId,
-          );
-        };
+              const finalTextId =
+                window.setTimeout(
+                  () => {
+                    hover.textContent =
+                      original;
+                  },
+                  passes * interval,
+                );
 
-        const handleLeave = () => {
-          restore();
-        };
+              timerIds.push(
+                finalTextId,
+              );
+            };
 
-        word.addEventListener(
-          "mouseenter",
-          handleEnter,
-        );
+          const handleLeave =
+            () => {
+              restore();
+            };
 
-        word.addEventListener(
-          "mouseleave",
-          handleLeave,
-        );
-
-        hoverCleanups.push(() => {
-          clearTimers();
-
-          word.removeEventListener(
+          word.addEventListener(
             "mouseenter",
             handleEnter,
           );
 
-          word.removeEventListener(
+          word.addEventListener(
             "mouseleave",
             handleLeave,
           );
 
-          restore();
-        });
-      });
+          hoverCleanups.push(
+            () => {
+              clearTimers();
 
-      /*
-       * =========================================
-       * INITIAL STATE
-       * =========================================
-       */
+              word.removeEventListener(
+                "mouseenter",
+                handleEnter,
+              );
+
+              word.removeEventListener(
+                "mouseleave",
+                handleLeave,
+              );
+
+              restore();
+            },
+          );
+        },
+      );
+
+      /* =======================================
+         INITIAL INTRO STATE
+      ======================================= */
 
       panels.forEach(
         (panel, index) => {
@@ -494,10 +564,11 @@ const ctx = gsap.context(() => {
               index === 0
                 ? 1
                 : 0,
-                pointerEvents:
-                index === 0
-                  ? "auto"
-                  : "none",
+
+            pointerEvents:
+              index === 0
+                ? "auto"
+                : "none",
           });
 
           gsap.set(lines, {
@@ -506,6 +577,7 @@ const ctx = gsap.context(() => {
             rotation: 0,
             scaleX: 1,
             scaleY: 1,
+
             opacity:
               index === 0
                 ? 1
@@ -514,25 +586,48 @@ const ctx = gsap.context(() => {
         },
       );
 
+      /* =======================================
+         INITIAL PROJECT STATE
+      ======================================= */
+
+      if (projectStage) {
+        gsap.set(
+          projectStage,
+          {
+            x: "100vw",
+          },
+        );
+      }
+
+      if (projectTrack) {
+        gsap.set(
+          projectTrack,
+          {
+            x: 0,
+          },
+        );
+      }
+
       gsap.set(projectCue, {
         opacity: 0,
         y: 40,
       });
 
-      /*
-       * =========================================
-       * SCROLL TIMELINE
-       * =========================================
-       */
+      /* =======================================
+         MASTER SCROLL TIMELINE
+      ======================================= */
 
       const timeline =
         gsap.timeline({
           scrollTrigger: {
+            id:
+              "introductionScroll",
+
             trigger: section,
 
             start: "top top",
 
-            end: "+=850%",
+            end: "+=1250%",
 
             scrub: 1,
 
@@ -540,15 +635,14 @@ const ctx = gsap.context(() => {
 
             anticipatePin: 1,
 
-            invalidateOnRefresh: true,
+            invalidateOnRefresh:
+              true,
           },
         });
 
-      /*
-       * =========================================
-       * EACH STATEMENT
-       * =========================================
-       */
+      /* =======================================
+         INTRO STATEMENTS
+      ======================================= */
 
       panels.forEach(
         (panel, index) => {
@@ -570,10 +664,7 @@ const ctx = gsap.context(() => {
             index <
             panels.length - 1
           ) {
-            /*
-             * CURRENT STATEMENT
-             * BREAKS APART
-             */
+            /* CURRENT PANEL BREAKS APART */
 
             lines.forEach(
               (
@@ -592,20 +683,26 @@ const ctx = gsap.context(() => {
                   {
                     x:
                       direction *
-                      (180 +
+                      (
+                        180 +
                         lineIndex *
-                          60),
+                          60
+                      ),
 
                     y:
-                      (lineIndex -
-                        1.5) *
+                      (
+                        lineIndex -
+                        1.5
+                      ) *
                       70,
 
                     rotation:
                       direction *
-                      (3 +
+                      (
+                        3 +
                         lineIndex *
-                          2),
+                          2
+                      ),
 
                     scaleX:
                       1.08 +
@@ -626,23 +723,20 @@ const ctx = gsap.context(() => {
               },
             );
 
-            /*
-             * CURRENT PANEL DISAPPEARS
-             */
-
             timeline.to(
               panel,
               {
                 opacity: 0,
-                pointerEvents: "none",
+
+                pointerEvents:
+                  "none",
+
                 duration: 0.12,
               },
               "<0.25",
             );
 
-            /*
-             * NEXT PANEL
-             */
+            /* NEXT PANEL */
 
             const nextPanel =
               panels[index + 1];
@@ -657,7 +751,6 @@ const ctx = gsap.context(() => {
                 .layout;
 
             let entryX = 0;
-
             let entryY = 0;
 
             if (
@@ -680,26 +773,29 @@ const ctx = gsap.context(() => {
               entryY = 300;
             }
 
-            /*
-             * Prepare next panel.
-             */
+            gsap.set(
+              nextPanel,
+              {
+                opacity: 1,
 
-            gsap.set(nextPanel, {
-              opacity: 1,
-              pointerEvents: "none",
-            });
+                pointerEvents:
+                  "none",
+              },
+            );
 
             timeline.set(
               panel,
               {
-                pointerEvents: "none",
+                pointerEvents:
+                  "none",
               },
             );
-            
+
             timeline.set(
               nextPanel,
               {
-                pointerEvents: "auto",
+                pointerEvents:
+                  "auto",
               },
             );
 
@@ -711,11 +807,13 @@ const ctx = gsap.context(() => {
                 gsap.set(line, {
                   x:
                     entryX +
-                    (lineIndex %
-                      2 ===
-                    0
-                      ? -40
-                      : 40),
+                    (
+                      lineIndex %
+                        2 ===
+                      0
+                        ? -40
+                        : 40
+                    ),
 
                   y:
                     entryY +
@@ -738,11 +836,6 @@ const ctx = gsap.context(() => {
               },
             );
 
-            /*
-             * NEXT STATEMENT
-             * PAINTS ITSELF IN
-             */
-
             nextLines.forEach(
               (
                 line,
@@ -752,15 +845,10 @@ const ctx = gsap.context(() => {
                   line,
                   {
                     x: 0,
-
                     y: 0,
-
                     rotation: 0,
-
                     scaleX: 1,
-
                     scaleY: 1,
-
                     opacity: 1,
 
                     duration:
@@ -778,10 +866,6 @@ const ctx = gsap.context(() => {
               },
             );
 
-            /*
-             * Breathing room.
-             */
-
             timeline.to(
               {},
               {
@@ -792,61 +876,193 @@ const ctx = gsap.context(() => {
         },
       );
 
-      /*
-       * =========================================
-       * FINAL PROJECT TRANSITION
-       * =========================================
-       */
+      /* =======================================
+         FINAL INTRO PANEL
+      ======================================= */
 
-      const finalPanel =
-        panels[
-          panels.length - 1
-        ];
-
-      const finalLines =
-        finalPanel.querySelectorAll<HTMLElement>(
-          ".intro-line",
-        );
-
-      finalLines.forEach(
-        (line, index) => {
-          timeline.to(
-            line,
-            {
-              y:
-                -(
-                  100 +
-                  index * 35
-                ),
-
-              x:
-                index % 2 === 0
-                  ? -120
-                  : 120,
-
-              opacity: 0,
-
-              duration: 0.45,
-
-              ease:
-                "power3.in",
-            },
-            "+=0.02",
-          );
+      timeline.to(
+        {},
+        {
+          duration: 0.45,
         },
       );
+
+      /* =======================================
+         SELECTED WORK APPEARS
+      ======================================= */
 
       timeline.to(
         projectCue,
         {
           opacity: 1,
           y: 0,
+
           duration: 0.5,
-          ease: "power3.out",
+
+          ease:
+            "power3.out",
         },
-        "<0.15",
+        "+=0.1",
       );
+
+      /* =======================================
+         PROJECT TRANSITION LABEL
+      ======================================= */
+
+      timeline.addLabel(
+        "projects",
+      );
+
+      projectScrollPosition =
+        timeline.duration();
+
+      /* =======================================
+         INTRO GEOMETRY → LEFT
+      ======================================= */
+
+      timeline.to(
+        geometryElements,
+        {
+          x: () =>
+            -window.innerWidth *
+            1.35,
+
+          opacity: 0,
+
+          duration: 1.2,
+
+          ease:
+            "power3.inOut",
+        },
+      );
+
+      /* =======================================
+         INTRODUCTION → LEFT
+      ======================================= */
+
+      timeline.to(
+        ".introduction-content",
+        {
+          x:
+            -window.innerWidth,
+
+          duration: 1.2,
+
+          ease:
+            "power3.inOut",
+        },
+        "<",
+      );
+
+      /* =======================================
+         PROJECTS → FROM RIGHT
+      ======================================= */
+
+      if (projectStage) {
+        timeline.to(
+          projectStage,
+          {
+            x: 0,
+
+            duration: 1.2,
+
+            ease:
+              "power3.inOut",
+          },
+          "<",
+        );
+      }
+
+      /* =======================================
+         PROJECTS BREATHING ROOM
+      ======================================= */
+
+      timeline.to(
+        {},
+        {
+          duration: 0.35,
+        },
+      );
+
+      /* =======================================
+         HORIZONTAL PROJECT TRACK
+      ======================================= */
+
+      if (projectTrack) {
+        /*
+         * =========================================
+         * PROJECT 01 — HOLD
+         * =========================================
+         */
+      
+        timeline.to({}, {
+          duration: 1.4,
+        });
+      
+        /*
+         * =========================================
+         * PROJECT 01 → PROJECT 02
+         * =========================================
+         */
+      
+        timeline.to(
+          projectTrack,
+          {
+            x: "-100vw",
+            duration: 1.2,
+            ease: "power2.inOut",
+          },
+        );
+      
+        /*
+         * =========================================
+         * PROJECT 02 — LONGER READING TIME
+         * =========================================
+         */
+      
+        timeline.to({}, {
+          duration: 2.2,
+        });
+      
+        /*
+         * =========================================
+         * PROJECT 02 → PROJECT 03
+         * =========================================
+         */
+      
+        timeline.to(
+          projectTrack,
+          {
+            x: "-200vw",
+            duration: 1.2,
+            ease: "power2.inOut",
+          },
+        );
+      
+        /*
+         * =========================================
+         * PROJECT 03 — HOLD
+         * =========================================
+         */
+      
+        timeline.to({}, {
+          duration: 2.0,
+        });
+      }
     }, section);
+
+    /* =========================================
+       CLICK LISTENER
+    ========================================= */
+
+    projectCue?.addEventListener(
+      "click",
+      handleProjectCueClick,
+    );
+
+    /* =========================================
+       CLEANUP
+    ========================================= */
 
     return () => {
       section.removeEventListener(
@@ -859,8 +1075,14 @@ const ctx = gsap.context(() => {
         handleIntroPointerLeave,
       );
 
+      projectCue?.removeEventListener(
+        "click",
+        handleProjectCueClick,
+      );
+
       hoverCleanups.forEach(
-        (cleanup) => cleanup(),
+        (cleanup) =>
+          cleanup(),
       );
 
       ctx.revert();
@@ -876,64 +1098,65 @@ const ctx = gsap.context(() => {
 
       <div className="introduction-content">
 
-        {/* RIGHT-SIDE INTERACTIVE LINES */}
+        {/* ======================================
+            RIGHT-SIDE GEOMETRY
+        ====================================== */}
 
         <div className="intro-geometry">
 
-  {/* Large cropped rectangle */}
-  <div
-    className="intro-geo-shape intro-geo-shape-one"
-    data-rotation="-13"
-  />
+          <div
+            className="intro-geo-shape intro-geo-shape-one"
+            data-rotation="-13"
+          />
 
-  {/* Tall vertical rectangle */}
-  <div
-    className="intro-geo-shape intro-geo-shape-two"
-    data-rotation="21"
-  />
+          <div
+            className="intro-geo-shape intro-geo-shape-two"
+            data-rotation="21"
+          />
 
-  {/* Rhombus */}
-  <div
-    className="intro-geo-shape intro-geo-shape-three"
-    data-rotation="37"
-  />
+          <div
+            className="intro-geo-shape intro-geo-shape-three"
+            data-rotation="37"
+          />
 
-  {/* Small square */}
-  <div
-    className="intro-geo-shape intro-geo-shape-four"
-    data-rotation="-27"
-  />
+          <div
+            className="intro-geo-shape intro-geo-shape-four"
+            data-rotation="-27"
+          />
 
-  {/* Connecting lines */}
-  <div
-    className="intro-geo-line intro-geo-line-one"
-    data-rotation="0"
-  />
+          <div
+            className="intro-geo-line intro-geo-line-one"
+            data-rotation="0"
+          />
 
-  <div
-    className="intro-geo-line intro-geo-line-two"
-    data-rotation="0"
-  />
+          <div
+            className="intro-geo-line intro-geo-line-two"
+            data-rotation="0"
+          />
 
-  <div
-    className="intro-geo-line intro-geo-line-three"
-    data-rotation="0"
-  />
+          <div
+            className="intro-geo-line intro-geo-line-three"
+            data-rotation="0"
+          />
 
-  <div
-    className="intro-geo-line intro-geo-line-four"
-    data-rotation="0"
-  />
+          <div
+            className="intro-geo-line intro-geo-line-four"
+            data-rotation="0"
+          />
 
-</div>
+        </div>
 
-        {/* HEADER */}
+        {/* ======================================
+            HEADER
+        ====================================== */}
 
         <div className="intro-index">
           INTRODUCTION
         </div>
 
-        {/* PANELS */}
+        {/* ======================================
+            INTRO PANELS
+        ====================================== */}
 
         <div className="intro-panels">
           {statements.map(
@@ -981,9 +1204,14 @@ const ctx = gsap.context(() => {
           )}
         </div>
 
-        {/* PROJECT CUE */}
+        {/* ======================================
+            SELECTED WORK
+        ====================================== */}
 
-        <div className="intro-project-cue">
+        <button
+          type="button"
+          className="intro-project-cue"
+        >
           <span>
             SELECTED WORK
           </span>
@@ -991,14 +1219,22 @@ const ctx = gsap.context(() => {
           <span className="intro-project-arrow">
             →
           </span>
-        </div>
+        </button>
 
-        {/* SCROLL */}
+        {/* ======================================
+            SCROLL
+        ====================================== */}
 
         <div className="intro-scroll">
           SCROLL
         </div>
       </div>
+
+      {/* ========================================
+          PROJECTS
+      ======================================== */}
+
+      <Projects />
     </section>
   );
 }

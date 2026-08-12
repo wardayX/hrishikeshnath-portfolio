@@ -577,11 +577,10 @@ body {
   width: 100vw;
   height: 100vh;
 
-  background: #f3f1ec;
-
-  color: #0a0a0a;
-
   overflow: hidden;
+
+  background: #f3f1ec;
+  color: #0a0a0a;
 }
 
 .introduction-background {
@@ -594,43 +593,30 @@ body {
 }
 
 .introduction-content {
-  position: relative;
+  position: absolute;
+  inset: 0;
 
   width: 100%;
   height: 100%;
 
-  z-index: 1;
+  z-index: 10;
 }
 
 
 /* =========================================================
-   RIGHT-SIDE INTERACTIVE LINES
-========================================================= */
-
-/* =========================================================
-   INTRODUCTION GEOMETRY
+   RIGHT-SIDE GEOMETRY
 ========================================================= */
 
 .intro-geometry {
   position: absolute;
-
   inset: 0;
+
+  overflow: hidden;
 
   pointer-events: none;
 
   z-index: 0;
-
-  overflow: hidden;
 }
-
-
-/* =========================================================
-   SHAPES
-========================================================= */
-
-/* =========================================================
-   BRUTALIST GEOMETRY
-========================================================= */
 
 .intro-geo-shape {
   position: absolute;
@@ -645,11 +631,10 @@ body {
 
   pointer-events: none;
 
-  will-change: transform, opacity;
+  will-change:
+    transform,
+    opacity;
 }
-
-
-/* LARGE CROPPED RECTANGLE */
 
 .intro-geo-shape-one {
   width: 360px;
@@ -661,9 +646,6 @@ body {
   transform: rotate(-13deg);
 }
 
-
-/* TALL RECTANGLE */
-
 .intro-geo-shape-two {
   width: 170px;
   height: 360px;
@@ -673,9 +655,6 @@ body {
 
   transform: rotate(21deg);
 }
-
-
-/* LARGE RHOMBUS */
 
 .intro-geo-shape-three {
   width: 230px;
@@ -687,9 +666,6 @@ body {
   transform: rotate(37deg);
 }
 
-
-/* SMALL ROTATED SQUARE */
-
 .intro-geo-shape-four {
   width: 145px;
   height: 145px;
@@ -699,10 +675,6 @@ body {
 
   transform: rotate(-27deg);
 }
-
-/* =========================================================
-   LINES
-========================================================= */
 
 .intro-geo-line {
   position: absolute;
@@ -722,18 +694,12 @@ body {
     opacity;
 }
 
-
-/* Upper line */
-
 .intro-geo-line-one {
   width: 34vw;
 
   right: -2vw;
   top: 27%;
 }
-
-
-/* Middle line */
 
 .intro-geo-line-two {
   width: 27vw;
@@ -742,9 +708,6 @@ body {
   top: 50%;
 }
 
-
-/* Lower long line */
-
 .intro-geo-line-three {
   width: 30vw;
 
@@ -752,15 +715,13 @@ body {
   top: 69%;
 }
 
-
-/* Small accent line */
-
 .intro-geo-line-four {
   width: 14vw;
 
   right: 20%;
   bottom: 16%;
 }
+
 
 /* =========================================================
    HEADER
@@ -779,7 +740,7 @@ body {
 
   letter-spacing: -0.02em;
 
-  z-index: 5;
+  z-index: 20;
 
   pointer-events: none;
 }
@@ -790,17 +751,17 @@ body {
 ========================================================= */
 
 .intro-panels {
-  position: relative;
+  position: absolute;
+  inset: 0;
 
   width: 100%;
   height: 100%;
 
-  z-index: 1;
+  z-index: 5;
 }
 
 .intro-panel {
   position: absolute;
-
   inset: 0;
 
   display: flex;
@@ -812,6 +773,7 @@ body {
 
   pointer-events: none;
 }
+
 .intro-copy {
   width: min(
     78vw,
@@ -855,7 +817,7 @@ body {
 
 
 /* =========================================================
-   HOVER WORD
+   HOVER TYPOGRAPHY
 ========================================================= */
 
 .intro-hover-word {
@@ -868,11 +830,14 @@ body {
   max-width: none;
 
   cursor: default;
+
   user-select: none;
 
   pointer-events: auto;
 
   overflow: visible;
+
+  z-index: 30;
 }
 
 .intro-word-base,
@@ -911,7 +876,7 @@ body {
 
 
 /* =========================================================
-   DIFFERENT STATEMENT COMPOSITIONS
+   INTRO COMPOSITIONS
 ========================================================= */
 
 .intro-layout-left .intro-copy {
@@ -925,7 +890,7 @@ body {
   position: absolute;
 
   left: 4vw;
-  top: 18vh;
+  top: 19vh;
 
   width: 92vw;
 }
@@ -934,7 +899,7 @@ body {
   position: absolute;
 
   left: 49%;
-  top: 50%;
+  top: 56%;
 
   width: 90vw;
 
@@ -948,25 +913,26 @@ body {
 .intro-layout-right .intro-copy {
   position: absolute;
 
-  left: 4vw;
-  top: 32vh;
+  right: 48vw;
+  top: 30vh;
 
   width: 48vw;
 
   text-align: left;
 }
+
 .intro-layout-bottom .intro-copy {
   position: absolute;
 
   left: 4vw;
-  bottom: 15vh;
+  bottom: 20vh;
 
   width: 92vw;
 }
 
 
 /* =========================================================
-   PROJECT CUE
+   SELECTED WORK
 ========================================================= */
 
 .intro-project-cue {
@@ -976,22 +942,36 @@ body {
   bottom: 32px;
 
   display: flex;
-
   align-items: center;
 
   gap: 12px;
+
+  border: 0;
+  padding: 0;
+
+  background: transparent;
+
+  color: #0a0a0a;
 
   opacity: 0;
 
   transform:
     translateY(20px);
 
+  font-family: "New Title", sans-serif;
+
   font-size: 28px;
   font-weight: 700;
 
   letter-spacing: -0.01em;
 
-  z-index: 10;
+  cursor: pointer;
+
+  z-index: 30;
+}
+
+.intro-project-cue:hover {
+  opacity: 0.6;
 }
 
 .intro-project-arrow {
@@ -1009,14 +989,425 @@ body {
   right: 32px;
   bottom: 32px;
 
+  font-family: "New Title", sans-serif;
+
   font-size: 28px;
   font-weight: 700;
 
   letter-spacing: -0.01em;
 
-  z-index: 10;
+  z-index: 20;
 
   pointer-events: none;
+}
+
+
+/* =========================================================
+   PROJECT STAGE
+========================================================= */
+
+/* =========================================================
+   PROJECT IMAGE
+========================================================= */
+
+.project-image {
+  position: absolute;
+  inset: 0;
+
+  width: 100%;
+  height: 100%;
+
+  object-fit: contain;
+
+  display: block;
+
+  cursor: zoom-in;
+}
+
+.project-image:hover {
+  opacity: 0.92;
+}
+
+
+/* =========================================================
+   PROJECT LIGHTBOX
+========================================================= */
+
+.project-lightbox {
+  position: fixed;
+  inset: 0;
+
+  overflow: auto;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 60px;
+
+  background: rgba(243, 241, 236, 0.98);
+
+  z-index: 9999;
+}
+
+.project-lightbox-image {
+  width: min(
+    1400px,
+    92vw
+  );
+
+  height: auto;
+
+  max-height: none;
+
+  object-fit: contain;
+}
+
+.project-lightbox-close {
+  position: absolute;
+
+  top: 24px;
+  right: 30px;
+
+  border: 0;
+  padding: 0;
+
+  background: transparent;
+
+  color: #0a0a0a;
+
+  font-family: "New Title", sans-serif;
+
+  font-size: 42px;
+  line-height: 1;
+
+  cursor: pointer;
+
+  z-index: 2;
+}
+
+.project-lightbox-close:hover {
+  opacity: 0.55;
+}
+
+.projects-stage {
+  position: absolute;
+  inset: 0;
+
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
+
+  background: #f3f1ec;
+
+  z-index: 50;
+}
+
+.projects-header {
+  position: absolute;
+
+  left: 32px;
+  top: 28px;
+
+  font-family: "New Title", sans-serif;
+
+  font-size: 28px;
+  font-weight: 700;
+
+  z-index: 20;
+}
+
+.projects-track {
+  display: flex;
+
+  width: max-content;
+  height: 100%;
+
+  will-change: transform;
+}
+
+.project-slide {
+  position: relative;
+
+  flex: 0 0 100vw;
+
+  width: 100vw;
+  height: 100vh;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   PROJECT TEXT
+========================================================= */
+
+.project-number {
+  position: absolute;
+
+  left: 4vw;
+  top: 22vh;
+
+  font-family: "New Title", sans-serif;
+
+  font-size: 30px;
+
+  font-weight: 700;
+}
+
+.project-info {
+  position: absolute;
+
+  right: 5vw;
+  top: 20vh;
+
+  width: 30vw;
+
+  z-index: 10;
+}
+
+.project-kicker {
+  margin-bottom: 16px;
+
+  font-size: 18px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.03em;
+}
+
+.project-info h2 {
+  margin: 0 0 24px;
+
+  font-family: "New Title", sans-serif;
+
+  font-size: clamp(
+    50px,
+    6vw,
+    100px
+  );
+
+  line-height: 0.82;
+
+  letter-spacing: -0.03em;
+}
+
+.project-info p {
+  width: 100%;
+
+  margin: 0 0 32px;
+
+  font-family: "New Title", sans-serif;
+
+  font-size: 22px;
+
+  line-height: 1;
+
+  font-weight: 500;
+}
+
+.project-features {
+  display: flex;
+  flex-direction: column;
+
+  gap: 8px;
+
+  margin-bottom: 36px;
+
+  font-size: 18px;
+}
+
+.project-features span {
+  display: block;
+
+  border-top: 1px solid
+    rgba(10, 10, 10, 0.35);
+
+  padding-top: 8px;
+}
+
+.project-view {
+  display: inline-flex;
+
+  align-items: center;
+  gap: 12px;
+
+  border: 0;
+  padding: 0;
+
+  background: none;
+
+  color: #0a0a0a;
+
+  font-family: "New Title", sans-serif;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  text-decoration: none;
+
+  cursor: pointer;
+}
+
+.project-view span {
+  font-size: 22px;
+}
+
+.project-view:hover {
+  opacity: 0.6;
+}
+
+/* =========================================================
+   PROJECT GEOMETRIC VISUAL
+========================================================= */
+
+.project-visual {
+  position: absolute;
+
+  left: 9vw;
+  top: 19vh;
+
+  width: 50vw;
+  height: 62vh;
+}
+
+.project-object,
+.project-wire {
+  position: absolute;
+
+  border: 1.5px solid #0a0a0a;
+
+  transform-origin: center center;
+}
+
+.project-object {
+  background: transparent;
+}
+
+.project-object-main {
+  width: 34vw;
+  height: 26vw;
+
+  left: 4vw;
+  top: 8vh;
+
+  transform:
+    rotate(-8deg);
+}
+
+.project-object-small {
+  width: 12vw;
+  height: 12vw;
+
+  left: 28vw;
+  top: 3vh;
+
+  transform:
+    rotate(21deg);
+}
+
+.project-object-tilted {
+  width: 15vw;
+  height: 22vw;
+
+  left: 1vw;
+  bottom: 2vh;
+
+  transform:
+    rotate(17deg);
+}
+
+.project-object-line {
+  position: absolute;
+
+  height: 1.5px;
+
+  background: #0a0a0a;
+}
+
+.project-object-line-one {
+  width: 70%;
+
+  left: 15%;
+  top: 30%;
+}
+
+.project-object-line-two {
+  width: 55%;
+
+  left: 25%;
+  top: 52%;
+
+  transform:
+    rotate(-6deg);
+}
+
+.project-object-line-three {
+  width: 40%;
+
+  left: 30%;
+  top: 72%;
+
+  transform:
+    rotate(8deg);
+}
+
+.project-wire {
+  height: 1.5px;
+
+  border: 0;
+
+  background: #0a0a0a;
+}
+
+.project-wire-one {
+  width: 18vw;
+
+  left: 0;
+  top: 17vh;
+
+  transform:
+    rotate(-8deg);
+}
+
+.project-wire-two {
+  width: 13vw;
+
+  left: 26vw;
+  top: 42vh;
+
+  transform:
+    rotate(12deg);
+}
+
+.project-wire-three {
+  width: 8vw;
+
+  left: 10vw;
+  top: 55vh;
+
+  transform:
+    rotate(-18deg);
+}
+
+
+
+/* =========================================================
+   PROJECT FOOTER CUE
+========================================================= */
+
+.project-bottom-label {
+  position: absolute;
+
+  left: 4vw;
+  bottom: 32px;
+
+  font-family: "New Title", sans-serif;
+
+  font-size: 18px;
+
+  font-weight: 700;
 }
 
 
@@ -1037,7 +1428,8 @@ body {
   }
 
   .intro-copy {
-    width: calc(100vw - 36px);
+    width:
+      calc(100vw - 36px);
 
     font-size: 16vw;
 
@@ -1055,7 +1447,8 @@ body {
     top: auto;
     bottom: auto;
 
-    width: calc(100vw - 36px);
+    width:
+      calc(100vw - 36px);
 
     transform: none;
 
@@ -1072,7 +1465,8 @@ body {
 
   .intro-layout-center .intro-copy {
     top: 50%;
-    transform: translateY(-50%);
+    transform:
+      translateY(-50%);
   }
 
   .intro-layout-right .intro-copy {
@@ -1097,19 +1491,36 @@ body {
     font-size: 13px;
   }
 
-  .intro-geo-line-one {
-    width: 42vw;
+  .projects-header {
+    left: 18px;
+    top: 20px;
+
+    font-size: 14px;
   }
 
-  .intro-geo-line-two {
-    width: 30vw;
+  .project-info {
+    right: 18px;
+    top: 18vh;
+
+    width: 48vw;
   }
 
-  .intro-geo-line-three {
-    width: 38vw;
+  .project-info h2 {
+    font-size: 11vw;
   }
 
-  .intro-geo-line-four {
-    width: 18vw;
+  .project-info p {
+    font-size: 16px;
+  }
+
+  .project-features {
+    font-size: 14px;
+  }
+
+  .project-visual {
+    left: 4vw;
+
+    width: 50vw;
+    height: 55vh;
   }
 }

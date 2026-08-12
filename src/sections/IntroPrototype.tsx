@@ -55,7 +55,7 @@ function IntroPrototype() {
       gsap.set(".prototype-real-hello", {
         opacity: 0,
       });
-
+      
       gsap.set(helloLetters, {
         opacity: 1,
         x: 0,
@@ -181,7 +181,7 @@ function IntroPrototype() {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=450%",
+          end: "+=650%",
           scrub: 1.2,
           pin: true,
           anticipatePin: 1,
@@ -203,12 +203,12 @@ function IntroPrototype() {
             duration: 0.2,
             ease: "power2.out",
           },
-          0.15,
+          0,
         );
       }
       
       timeline.to({}, {
-        duration: 0.35,
+        duration: 0.55,
       });
 
       /*
@@ -225,7 +225,7 @@ function IntroPrototype() {
             duration: 0.8,
             ease: "power2.inOut",
           },
-          0.35,
+          0.95,
         );
       });
 
@@ -676,7 +676,7 @@ function IntroPrototype() {
         {/* SCROLL HINT — IMPORTANT:
             outside hello-stage */}
         <div className="prototype-scroll-hint">
-          <span>SCROLL TO EXPLORE</span>
+          <span>EXPLORE THE JOURNEY</span>
           <span className="prototype-scroll-arrow">↓</span>
         </div>
 

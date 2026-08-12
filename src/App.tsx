@@ -1,4 +1,3 @@
-import "./index.css";
 import IntroPrototype from "./sections/IntroPrototype";
 import Introduction from "./sections/Introduction";
 
