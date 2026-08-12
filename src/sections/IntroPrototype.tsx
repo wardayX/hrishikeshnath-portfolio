@@ -90,8 +90,9 @@ function IntroPrototype() {
       });
 
       gsap.set(geometry, {
-        opacity: 0,
         scale: 0.96,
+        x: 0,
+        y: 0,
         });
 
       /*
@@ -340,13 +341,22 @@ function IntroPrototype() {
       );
 
       timeline.to(
+        ".brutalist-background",
+        {
+          opacity: 1,
+          duration: 1.2,
+          ease: "power2.out",
+        },
+        2.45,
+      );
+
+      timeline.to(
         geometry,
         {
-          opacity: 0.22,
           scale: 1,
           duration: 1.2,
           stagger: 0.08,
-          ease: "power3.out",
+          ease: "power2.out",
         },
         2.45,
       );

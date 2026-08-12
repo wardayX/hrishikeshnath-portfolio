@@ -406,6 +406,8 @@ body {
   overflow: hidden;
 
   pointer-events: none;
+  opacity: 0;
+  will-change: opacity;
 
   z-index: 2;
 }
@@ -414,7 +416,7 @@ body {
 .brutalist-line {
   position: absolute;
 
-  opacity: 0;
+  opacity: 0.22;
 
   z-index: 3;
 
@@ -423,8 +425,7 @@ body {
   transform-origin: center center;
 
   will-change:
-    transform,
-    opacity;
+    transform;
 }
 .shape-one {
   width: 340px;
@@ -458,7 +459,7 @@ body {
 
 .line-one {
   width: 38vw;
-  height: 1px;
+  height: 2px;
 
   right: 0;
   top: 34%;
@@ -469,7 +470,7 @@ body {
 
 .line-two {
   width: 28vw;
-  height: 1px;
+  height: 2px;
 
   right: 5%;
   bottom: 19%;
