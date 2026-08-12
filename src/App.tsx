@@ -1,8 +1,14 @@
 import "./index.css";
 import IntroPrototype from "./sections/IntroPrototype";
+import Introduction from "./sections/Introduction";
 
 function App() {
-  return <IntroPrototype />;
+  return (
+    <>
+      <IntroPrototype />
+      <Introduction />
+    </>
+  );
 }
 
 export default App;

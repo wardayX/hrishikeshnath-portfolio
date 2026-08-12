@@ -13,7 +13,7 @@
   background: #000000;
 }
 
-* {
+*{
   box-sizing: border-box;
 }
 
@@ -424,9 +424,9 @@ body {
 
   transform-origin: center center;
 
-  will-change:
-    transform;
+  will-change: transform;
 }
+
 .shape-one {
   width: 340px;
   height: 220px;
@@ -477,4 +477,217 @@ body {
 
   background: #0a0a0a;
   border: 0;
+}
+/* =========================================================
+   INTRODUCTION
+========================================================= */
+
+.introduction-section {
+  position: relative;
+
+  width: 100vw;
+  height: 100vh;
+
+  background: #f3f1ec;
+
+  color: #0a0a0a;
+
+  overflow: hidden;
+}
+
+.introduction-background {
+  position: absolute;
+  inset: 0;
+
+  background: #f3f1ec;
+
+  z-index: 0;
+}
+
+.introduction-content {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+
+  z-index: 1;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.intro-index {
+  position: absolute;
+  top: 28px;
+  left: 32px;
+
+  font-family: "New Title", sans-serif;
+
+  font-size: 28px;
+  font-weight: 700;
+
+  letter-spacing: -0.02em;
+
+  z-index: 5;
+}
+
+/* =========================================================
+   PANELS
+========================================================= */
+
+.intro-panels {
+  position: relative;
+
+  width: 100%;
+  height: 100%;
+}
+
+.intro-panel {
+  position: absolute;
+
+  inset: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding: 80px 32px;
+
+  pointer-events: none;
+}
+
+
+.intro-copy {
+  width: min(
+    78vw,
+    1050px
+  );
+
+  font-family: "New Title", sans-serif;
+
+  font-size: clamp(
+    64px,
+    8.4vw,
+    145px
+  );
+
+  font-weight: 700;
+
+  line-height: 0.82;
+
+  letter-spacing: -0.025em;
+
+  text-transform: uppercase;
+}
+
+.intro-small {
+  font-size: 0.46em;
+
+  line-height: 0.95;
+
+  letter-spacing: -0.015em;
+}
+
+.intro-accent {
+  font-size: 0.78em;
+
+  line-height: 0.86;
+}
+
+
+/* =========================================================
+   PROJECT CUE
+========================================================= */
+
+.intro-project-cue {
+  position: absolute;
+
+  left: 32px;
+  bottom: 32px;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  opacity: 0;
+
+  transform: translateY(20px);
+
+  font-size: 28px;
+  font-weight: 700;
+
+  letter-spacing: -0.01em;
+}
+
+.intro-project-arrow {
+  font-size: 24px;
+}
+
+
+/* =========================================================
+   SCROLL
+========================================================= */
+
+.intro-scroll {
+  position: absolute;
+
+  right: 32px;
+  bottom: 32px;
+
+  font-size: 28px;
+  font-weight: 700;
+
+  letter-spacing: -0.01em;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+  .intro-index {
+    top: 20px;
+    left: 18px;
+    font-size: 14px;
+  }
+  
+  .intro-project-cue {
+    left: 18px;
+    bottom: 20px;
+    font-size: 14px;
+  }
+  
+  .intro-scroll {
+    right: 18px;
+    bottom: 20px;
+    font-size: 13px;
+  }
+
+  .intro-panel {
+    padding: 80px 18px;
+  }
+
+  .intro-number {
+    left: 18px;
+  }
+
+  .intro-copy {
+    width: calc(100vw - 36px);
+  
+    font-size: 16vw;
+  
+    line-height: 0.8;
+  }
+
+  .intro-small {
+    font-size: 0.5em;
+  }
+
+  
 }
