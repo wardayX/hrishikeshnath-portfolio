@@ -6,6 +6,99 @@
   font-style: normal;
   font-display: swap;
 }
+/* =========================================================
+   CLASH GROTESK
+========================================================= */
+
+@font-face {
+  font-family: "Clash Grotesk";
+  src: url("/fonts/ClashGrotesk_Complete/Fonts/WEB/fonts/ClashGrotesk-Variable.woff2")
+    format("woff2");
+
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* =========================================================
+   NIPPO
+========================================================= */
+
+@font-face {
+  font-family: "Nippo";
+  src: url("/fonts/Nippo_Complete/Fonts/WEB/fonts/Nippo-Variable.woff2")
+    format("woff2");
+
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* =========================================================
+   STYRO
+========================================================= */
+
+
+/* =========================================================
+   BOSKA
+========================================================= */
+
+@font-face {
+  font-family: "Boska";
+  src: url("/fonts/Boska_Complete/Fonts/WEB/fonts/Boska-Variable.woff2")
+    format("woff2");
+
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* =========================================================
+   TELMA
+========================================================= */
+
+@font-face {
+  font-family: "Telma";
+  src: url("/fonts/Telma_Complete/Fonts/WEB/fonts/Telma-Variable.woff2")
+    format("woff2");
+
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* =========================================================
+   AKTURA
+========================================================= */
+
+@font-face {
+  font-family: "Aktura";
+  src: url("/fonts/Aktura_Complete/Fonts/WEB/fonts/Aktura-Variable.woff2")
+    format("woff2");
+
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+
+/* =========================================================
+   BRITNEY
+========================================================= */
+
+@font-face {
+  font-family: "Britney";
+  src: url("/fonts/Britney_Complete/Fonts/WEB/fonts/Britney-Variable.woff2")
+    format("woff2");
+
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root {
   font-family: "New Title", sans-serif;
@@ -94,7 +187,7 @@ body {
 
   font-family: "New Title", sans-serif;
 
-  font-size: 11px;
+  font-size: 17px;
   font-weight: 500;
 
   letter-spacing: 0.04em;
@@ -357,10 +450,6 @@ body {
   margin-top: 0.47em;
 }
 
-.prototype-name-last {
-  margin-top: 0.47em;
-}
-
 
 /* =========================================================
    MOBILE
@@ -515,11 +604,171 @@ body {
 
 
 /* =========================================================
+   RIGHT-SIDE INTERACTIVE LINES
+========================================================= */
+
+/* =========================================================
+   INTRODUCTION GEOMETRY
+========================================================= */
+
+.intro-geometry {
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  overflow: hidden;
+}
+
+
+/* =========================================================
+   SHAPES
+========================================================= */
+
+/* =========================================================
+   BRUTALIST GEOMETRY
+========================================================= */
+
+.intro-geo-shape {
+  position: absolute;
+
+  background: transparent;
+
+  border: 1.5px solid #0a0a0a;
+
+  opacity: 0.20;
+
+  transform-origin: center center;
+
+  pointer-events: none;
+
+  will-change: transform, opacity;
+}
+
+
+/* LARGE CROPPED RECTANGLE */
+
+.intro-geo-shape-one {
+  width: 360px;
+  height: 230px;
+
+  right: -110px;
+  top: 13%;
+
+  transform: rotate(-13deg);
+}
+
+
+/* TALL RECTANGLE */
+
+.intro-geo-shape-two {
+  width: 170px;
+  height: 360px;
+
+  right: 17%;
+  top: 36%;
+
+  transform: rotate(21deg);
+}
+
+
+/* LARGE RHOMBUS */
+
+.intro-geo-shape-three {
+  width: 230px;
+  height: 230px;
+
+  right: 4%;
+  top: 50%;
+
+  transform: rotate(37deg);
+}
+
+
+/* SMALL ROTATED SQUARE */
+
+.intro-geo-shape-four {
+  width: 145px;
+  height: 145px;
+
+  right: 28%;
+  bottom: 13%;
+
+  transform: rotate(-27deg);
+}
+
+/* =========================================================
+   LINES
+========================================================= */
+
+.intro-geo-line {
+  position: absolute;
+
+  height: 2px;
+
+  background: #0a0a0a;
+
+  opacity: 0.16;
+
+  transform-origin: center center;
+
+  pointer-events: none;
+
+  will-change:
+    transform,
+    opacity;
+}
+
+
+/* Upper line */
+
+.intro-geo-line-one {
+  width: 34vw;
+
+  right: -2vw;
+  top: 27%;
+}
+
+
+/* Middle line */
+
+.intro-geo-line-two {
+  width: 27vw;
+
+  right: 7%;
+  top: 50%;
+}
+
+
+/* Lower long line */
+
+.intro-geo-line-three {
+  width: 30vw;
+
+  right: -3%;
+  top: 69%;
+}
+
+
+/* Small accent line */
+
+.intro-geo-line-four {
+  width: 14vw;
+
+  right: 20%;
+  bottom: 16%;
+}
+
+/* =========================================================
    HEADER
 ========================================================= */
 
 .intro-index {
   position: absolute;
+
   top: 28px;
   left: 32px;
 
@@ -531,7 +780,10 @@ body {
   letter-spacing: -0.02em;
 
   z-index: 5;
+
+  pointer-events: none;
 }
+
 
 /* =========================================================
    PANELS
@@ -542,6 +794,8 @@ body {
 
   width: 100%;
   height: 100%;
+
+  z-index: 1;
 }
 
 .intro-panel {
@@ -558,8 +812,6 @@ body {
 
   pointer-events: none;
 }
-
-
 .intro-copy {
   width: min(
     78vw,
@@ -583,18 +835,133 @@ body {
   text-transform: uppercase;
 }
 
-.intro-small {
-  font-size: 0.46em;
+.intro-line {
+  position: relative;
 
-  line-height: 0.95;
+  display: block;
 
-  letter-spacing: -0.015em;
+  width: max-content;
+
+  max-width: none;
+
+  overflow: visible;
+
+  pointer-events: auto;
+
+  will-change:
+    transform,
+    opacity;
 }
 
-.intro-accent {
-  font-size: 0.78em;
 
-  line-height: 0.86;
+/* =========================================================
+   HOVER WORD
+========================================================= */
+
+.intro-hover-word {
+  position: relative;
+
+  display: inline-grid;
+
+  width: max-content;
+
+  max-width: none;
+
+  cursor: default;
+  user-select: none;
+
+  pointer-events: auto;
+
+  overflow: visible;
+}
+
+.intro-word-base,
+.intro-word-hover {
+  grid-area: 1 / 1;
+
+  display: block;
+
+  width: max-content;
+
+  max-width: none;
+
+  margin: 0;
+  padding: 0;
+
+  white-space: nowrap;
+
+  line-height: inherit;
+}
+
+.intro-word-base {
+  font-family: "New Title", sans-serif;
+
+  opacity: 1;
+}
+
+.intro-word-hover {
+  font-family: "New Title", sans-serif;
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  overflow: visible;
+}
+
+
+/* =========================================================
+   DIFFERENT STATEMENT COMPOSITIONS
+========================================================= */
+
+.intro-layout-left .intro-copy {
+  position: absolute;
+
+  left: 4vw;
+  top: 18vh;
+}
+
+.intro-layout-wide .intro-copy {
+  position: absolute;
+
+  left: 4vw;
+  top: 18vh;
+
+  width: 92vw;
+}
+
+.intro-layout-center .intro-copy {
+  position: absolute;
+
+  left: 49%;
+  top: 50%;
+
+  width: 90vw;
+
+  transform:
+    translate(
+      -50%,
+      -50%
+    );
+}
+
+.intro-layout-right .intro-copy {
+  position: absolute;
+
+  left: 4vw;
+  top: 32vh;
+
+  width: 48vw;
+
+  text-align: left;
+}
+.intro-layout-bottom .intro-copy {
+  position: absolute;
+
+  left: 4vw;
+  bottom: 15vh;
+
+  width: 92vw;
 }
 
 
@@ -616,12 +983,15 @@ body {
 
   opacity: 0;
 
-  transform: translateY(20px);
+  transform:
+    translateY(20px);
 
   font-size: 28px;
   font-weight: 700;
 
   letter-spacing: -0.01em;
+
+  z-index: 10;
 }
 
 .intro-project-arrow {
@@ -643,6 +1013,10 @@ body {
   font-weight: 700;
 
   letter-spacing: -0.01em;
+
+  z-index: 10;
+
+  pointer-events: none;
 }
 
 
@@ -654,40 +1028,88 @@ body {
   .intro-index {
     top: 20px;
     left: 18px;
+
     font-size: 14px;
-  }
-  
-  .intro-project-cue {
-    left: 18px;
-    bottom: 20px;
-    font-size: 14px;
-  }
-  
-  .intro-scroll {
-    right: 18px;
-    bottom: 20px;
-    font-size: 13px;
   }
 
   .intro-panel {
     padding: 80px 18px;
   }
 
-  .intro-number {
-    left: 18px;
-  }
-
   .intro-copy {
     width: calc(100vw - 36px);
-  
+
     font-size: 16vw;
-  
+
     line-height: 0.8;
   }
 
-  .intro-small {
-    font-size: 0.5em;
+  .intro-layout-left .intro-copy,
+  .intro-layout-wide .intro-copy,
+  .intro-layout-center .intro-copy,
+  .intro-layout-right .intro-copy,
+  .intro-layout-bottom .intro-copy {
+    left: 18px;
+    right: auto;
+
+    top: auto;
+    bottom: auto;
+
+    width: calc(100vw - 36px);
+
+    transform: none;
+
+    text-align: left;
   }
 
-  
+  .intro-layout-left .intro-copy {
+    top: 25vh;
+  }
+
+  .intro-layout-wide .intro-copy {
+    top: 20vh;
+  }
+
+  .intro-layout-center .intro-copy {
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .intro-layout-right .intro-copy {
+    top: 25vh;
+  }
+
+  .intro-layout-bottom .intro-copy {
+    bottom: 20vh;
+  }
+
+  .intro-project-cue {
+    left: 18px;
+    bottom: 20px;
+
+    font-size: 14px;
+  }
+
+  .intro-scroll {
+    right: 18px;
+    bottom: 20px;
+
+    font-size: 13px;
+  }
+
+  .intro-geo-line-one {
+    width: 42vw;
+  }
+
+  .intro-geo-line-two {
+    width: 30vw;
+  }
+
+  .intro-geo-line-three {
+    width: 38vw;
+  }
+
+  .intro-geo-line-four {
+    width: 18vw;
+  }
 }

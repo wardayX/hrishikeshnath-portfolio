@@ -489,9 +489,6 @@ function IntroPrototype() {
           gsap.to(shape, {
             x: mouseX * strength,
             y: mouseY * strength * 0.7,
-            rotation:
-              mouseX *
-              (index % 2 === 0 ? 1.5 : -1.5),
             duration: 0.7,
             ease: "power3.out",
             overwrite: true,
