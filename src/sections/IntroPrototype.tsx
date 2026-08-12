@@ -19,15 +19,33 @@ function IntroPrototype() {
     }
 
     const ctx = gsap.context(() => {
-      const helloLetters =
-        gsap.utils.toArray<HTMLElement>(".prototype-letter");
+      const helloLetters = gsap.utils.toArray<HTMLElement>(
+        ".prototype-letter",
+      );
+
+      const decoyLetters = gsap.utils.toArray<HTMLElement>(
+        ".decoy-letter",
+      );
 
       /*
-       * Initial state
+       * =========================================
+       * INITIAL STATE
+       * =========================================
        */
 
       gsap.set(background, {
         backgroundColor: "#000000",
+      });
+
+      /*
+       * REAL HELLO
+       *
+       * This is hidden only until the decoy finishes.
+       * Its actual character geometry is untouched.
+       */
+
+      gsap.set(".prototype-real-hello", {
+        opacity: 0,
       });
 
       gsap.set(helloLetters, {
@@ -40,7 +58,17 @@ function IntroPrototype() {
       });
 
       /*
-       * These remain hidden until the white stage.
+       * DECOY LETTERS
+       *
+       * Start with nothing visible.
+       */
+
+      gsap.set(decoyLetters, {
+        opacity: 0,
+      });
+
+      /*
+       * I AM + NAME
        */
 
       gsap.set(".prototype-iam", {
@@ -54,7 +82,84 @@ function IntroPrototype() {
       });
 
       /*
-       * Main scroll timeline
+       * =========================================
+       * ONE-TIME DECOY HELLO
+       * =========================================
+       *
+       * H
+       * HE
+       * HEL
+       * HELL
+       * HELLO
+       * HELLO.
+       *
+       * We reveal the existing spans rather than
+       * replacing textContent.
+       */
+
+      const loadTimeline = gsap.timeline();
+
+      decoyLetters.forEach((letter, index) => {
+        loadTimeline.to(
+          letter,
+          {
+            opacity: 1,
+            duration: 0.055,
+            ease: "power2.out",
+          },
+          index === 0 ? 0 : "-=0.008",
+        );
+      });
+
+      /*
+       * Tiny settle.
+       */
+
+      loadTimeline
+        .to(".prototype-decoy-hello", {
+          scaleX: 1.012,
+          scaleY: 1.012,
+          duration: 0.08,
+          ease: "power2.out",
+        })
+        .to(".prototype-decoy-hello", {
+          scaleX: 1,
+          scaleY: 1,
+          duration: 0.08,
+          ease: "power2.out",
+        });
+
+      /*
+       * Seamless handoff:
+       *
+       * real HELLO appears exactly where the
+       * decoy currently is.
+       */
+
+      loadTimeline
+        .to(
+          ".prototype-real-hello",
+          {
+            opacity: 1,
+            duration: 0.08,
+            ease: "none",
+          },
+          "+=0.04",
+        )
+        .to(
+          ".prototype-decoy-hello",
+          {
+            opacity: 0,
+            duration: 0.08,
+            ease: "none",
+          },
+          "<",
+        );
+
+      /*
+       * =========================================
+       * MAIN SCROLL TIMELINE
+       * =========================================
        */
 
       const timeline = gsap.timeline({
@@ -71,8 +176,7 @@ function IntroPrototype() {
 
       /*
        * =========================================
-       * PHASE 1
-       * HELLO RESTS
+       * PHASE 1 — HELLO RESTS
        * =========================================
        */
 
@@ -82,8 +186,7 @@ function IntroPrototype() {
 
       /*
        * =========================================
-       * PHASE 2
-       * VERTICAL STRETCH
+       * PHASE 2 — VERTICAL STRETCH
        * =========================================
        */
 
@@ -101,8 +204,7 @@ function IntroPrototype() {
 
       /*
        * =========================================
-       * PHASE 3
-       * FIRST DISPERSION
+       * PHASE 3 — FIRST DISPERSION
        * =========================================
        */
 
@@ -140,11 +242,14 @@ function IntroPrototype() {
             x: xPositions[index],
             y: yPositions[index],
             rotation: rotations[index],
+
             scaleX:
               index === 2 || index === 3
                 ? 1.08
                 : 0.96,
+
             scaleY: 1,
+
             duration: 1.1,
             ease: "power2.inOut",
           },
@@ -154,8 +259,7 @@ function IntroPrototype() {
 
       /*
        * =========================================
-       * PHASE 4
-       * ELASTIC DISPERSION
+       * PHASE 4 — ELASTIC DISPERSION
        * =========================================
        */
 
@@ -165,9 +269,16 @@ function IntroPrototype() {
         timeline.to(
           character,
           {
-            x: direction * (220 + index * 55),
-            y: (index - 2.5) * 175,
-            rotation: direction * (25 + index * 14),
+            x:
+              direction *
+              (220 + index * 55),
+
+            y:
+              (index - 2.5) * 175,
+
+            rotation:
+              direction *
+              (25 + index * 14),
 
             scaleX:
               index === 2
@@ -188,8 +299,7 @@ function IntroPrototype() {
 
       /*
        * =========================================
-       * PHASE 5
-       * BLACK → WARM WHITE
+       * PHASE 5 — BLACK → WARM WHITE
        * =========================================
        */
 
@@ -205,11 +315,8 @@ function IntroPrototype() {
 
       /*
        * =========================================
-       * PHASE 6
-       * I AM
+       * PHASE 6 — I AM
        * =========================================
-       *
-       * HELLO animation is untouched.
        */
 
       timeline.to(
@@ -225,8 +332,7 @@ function IntroPrototype() {
 
       /*
        * =========================================
-       * PHASE 7
-       * NAME
+       * PHASE 7 — NAME
        * =========================================
        */
 
@@ -243,12 +349,8 @@ function IntroPrototype() {
 
       /*
        * =========================================
-       * PHASE 8
-       * HELLO LEAVES
+       * PHASE 8 — HELLO LEAVES
        * =========================================
-       *
-       * Happens after the name has started
-       * appearing.
        */
 
       helloLetters.forEach((character, index) => {
@@ -257,12 +359,23 @@ function IntroPrototype() {
         timeline.to(
           character,
           {
-            x: direction * (420 + index * 90),
-            y: direction * (280 + index * 70),
-            rotation: direction * (55 + index * 18),
+            x:
+              direction *
+              (420 + index * 90),
+
+            y:
+              direction *
+              (280 + index * 70),
+
+            rotation:
+              direction *
+              (55 + index * 18),
+
             scaleX: 0.15,
             scaleY: 0.15,
+
             opacity: 0,
+
             duration: 1,
             ease: "power3.in",
           },
@@ -288,28 +401,56 @@ function IntroPrototype() {
 
       <div className="prototype-content">
 
-        {/* HELLO */}
+        {/* =====================================
+            HELLO STAGE
+        ===================================== */}
 
-        <div className="prototype-word">
-          {letters.map((letter, index) => (
-            <span
-              key={`${letter}-${index}`}
-              className="prototype-letter"
-            >
-              {letter}
-            </span>
-          ))}
+        <div className="hello-stage">
+
+          {/* ONE-TIME DECOY */}
+
+          <div className="prototype-decoy-hello">
+            {"HELLO.".split("").map((letter, index) => (
+              <span
+                key={`${letter}-${index}`}
+                className="decoy-letter"
+              >
+                {letter}
+              </span>
+            ))}
+          </div>
+
+          {/* REAL SCROLL-CONTROLLED HELLO */}
+
+          <div className="prototype-real-hello">
+            <div className="prototype-word">
+              {letters.map((letter, index) => (
+                <span
+                  key={`${letter}-${index}`}
+                  className="prototype-letter"
+                >
+                  {letter}
+                </span>
+              ))}
+            </div>
+          </div>
+
         </div>
 
-        {/* I AM */}
+        {/* =====================================
+            I AM
+        ===================================== */}
 
         <div className="prototype-iam">
           I AM
         </div>
 
-        {/* NAME */}
+        {/* =====================================
+            NAME
+        ===================================== */}
 
         <div className="prototype-name">
+
           <div className="prototype-name-line">
             HRISHIKESH
           </div>
@@ -317,6 +458,7 @@ function IntroPrototype() {
           <div className="prototype-name-line prototype-name-last">
             NATH
           </div>
+
         </div>
 
       </div>

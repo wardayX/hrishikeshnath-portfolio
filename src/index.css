@@ -76,20 +76,36 @@ body {
   z-index: 1;
 }
 
-
 /* =========================================================
-   HELLO
+   HELLO STAGE
 ========================================================= */
 
-.prototype-word {
+.hello-stage {
   position: absolute;
 
   top: 50%;
   left: 50%;
 
-  display: flex;
+  width: max-content;
+  height: max-content;
 
   transform: translate(-50%, -50%);
+
+  z-index: 5;
+}
+
+
+/* =========================================================
+   DECOY HELLO
+========================================================= */
+
+.prototype-decoy-hello {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  margin: 0;
 
   font-family: "New Title", sans-serif;
 
@@ -102,13 +118,62 @@ body {
   font-weight: 700;
 
   line-height: 0.75;
+
   letter-spacing: -0.02em;
 
   color: #ffffff;
 
   white-space: nowrap;
 
-  z-index: 5;
+  transform-origin: center center;
+
+  opacity: 0;
+
+  z-index: 2;
+}
+
+
+/* =========================================================
+   REAL HELLO
+========================================================= */
+
+.prototype-real-hello {
+  position: relative;
+
+  opacity: 0;
+
+  z-index: 1;
+}
+
+
+/* =========================================================
+   REAL WORD
+========================================================= */
+
+.prototype-word {
+  position: relative;
+
+  display: flex;
+
+  margin: 0;
+
+  font-family: "New Title", sans-serif;
+
+  font-size: clamp(
+    150px,
+    21vw,
+    360px
+  );
+
+  font-weight: 700;
+
+  line-height: 0.75;
+
+  letter-spacing: -0.02em;
+
+  color: #ffffff;
+
+  white-space: nowrap;
 }
 
 .prototype-letter {
@@ -116,13 +181,56 @@ body {
 
   position: relative;
 
-  opacity: 1;
-
   transform-origin: center center;
 
   will-change: transform;
 }
 
+.prototype-decoy-hello {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+
+  display: flex;
+
+  margin: 0;
+
+  font-family: "New Title", sans-serif;
+
+  font-size: clamp(
+    150px,
+    21vw,
+    360px
+  );
+
+  font-weight: 700;
+
+  line-height: 0.75;
+
+  letter-spacing: -0.02em;
+
+  color: #ffffff;
+
+  white-space: nowrap;
+
+  transform-origin: center center;
+
+  opacity: 1;
+
+  z-index: 2;
+}
+
+.decoy-letter {
+  display: inline-block;
+
+  margin: 0;
+  padding: 0;
+
+  opacity: 0;
+
+  transform: none;
+}
 
 /* =========================================================
    I AM
