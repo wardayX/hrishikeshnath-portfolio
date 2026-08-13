@@ -150,7 +150,6 @@ public/
 ## Contact
 
 - Email: nathh722@gmail.com
-- Phone: +91 93658 06134
 
 ## License
 
