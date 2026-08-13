@@ -188,7 +188,11 @@ function IntroPrototype() {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=450%",
+          end: () =>
+            window.innerWidth <= 768
+              ? "+=700%"
+              : "+=450%",
+
           scrub: 1.2,
           pin: true,
           anticipatePin: 1,

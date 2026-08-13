@@ -700,7 +700,10 @@ function Introduction() {
 
             start: "top top",
 
-            end: "+=1250%",
+            end: () =>
+              window.innerWidth <= 768
+                ? "+=2000%"
+                : "+=1250%",
 
             scrub: 1,
 
