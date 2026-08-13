@@ -719,7 +719,7 @@ function Introduction() {
        */
 
       introTriggerRef.current =
-        timeline.scrollTrigger;
+        timeline.scrollTrigger ?? null;
 
       /*
        * =======================================
