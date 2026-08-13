@@ -181,7 +181,7 @@ function IntroPrototype() {
         scrollTrigger: {
           trigger: section,
           start: "top top",
-          end: "+=650%",
+          end: "+=450%",
           scrub: 1.2,
           pin: true,
           anticipatePin: 1,
@@ -203,12 +203,12 @@ function IntroPrototype() {
             duration: 0.2,
             ease: "power2.out",
           },
-          0,
+          0.15,
         );
       }
       
       timeline.to({}, {
-        duration: 0.55,
+        duration: 0.35,
       });
 
       /*
@@ -225,7 +225,7 @@ function IntroPrototype() {
             duration: 0.8,
             ease: "power2.inOut",
           },
-          0.95,
+          0.35,
         );
       });
 

@@ -966,8 +966,8 @@ body {
   letter-spacing: -0.01em;
 
   cursor: pointer;
-
-  z-index: 30;
+  pointer-events: auto;
+  z-index: 100;
 }
 
 .intro-project-cue:hover {
@@ -1522,5 +1522,446 @@ body {
 
     width: 50vw;
     height: 55vh;
+  }
+}
+
+
+
+/* =========================================================
+   FOOTER / CONTACT
+========================================================= */
+
+.footer-section {
+  position: relative;
+
+  width: 100vw;
+
+  min-height: 76vh;
+
+  overflow: hidden;
+
+  background: #f3f1ec;
+  color: #0a0a0a;
+
+  padding:
+    40px 32px 28px;
+
+  box-sizing: border-box;
+}
+.footer-background {
+  position: absolute;
+  inset: 0;
+
+  background: #f3f1ec;
+
+  z-index: 0;
+}
+
+
+/* =========================================================
+   GEOMETRY
+========================================================= */
+
+.footer-geometry {
+  position: absolute;
+  inset: 0;
+
+  overflow: hidden;
+
+  pointer-events: none;
+
+  z-index: 0;
+}
+
+.footer-geo {
+  position: absolute;
+
+  background: transparent;
+
+  border: 1.5px solid #0a0a0a;
+
+  opacity: 0.18;
+
+  transform-origin: center center;
+
+  will-change: transform;
+}
+
+.footer-geo-large {
+  width: 340px;
+  height: 220px;
+
+  right: -110px;
+  top: 8%;
+
+  transform: rotate(-12deg);
+}
+
+.footer-geo-tall {
+  width: 150px;
+  height: 300px;
+
+  right: 18%;
+  bottom: -60px;
+
+  transform: rotate(17deg);
+}
+
+.footer-geo-diamond {
+  width: 170px;
+  height: 170px;
+
+  right: 5%;
+  bottom: 24%;
+
+  transform: rotate(32deg);
+}
+
+.footer-geo-line {
+  position: absolute;
+
+  height: 2px;
+
+  background: #0a0a0a;
+
+  opacity: 0.15;
+
+  transform-origin: center center;
+
+  will-change: transform;
+}
+
+.footer-geo-line-one {
+  width: 32vw;
+
+  right: -2vw;
+  top: 32%;
+}
+
+.footer-geo-line-two {
+  width: 24vw;
+
+  right: 10%;
+  top: 57%;
+}
+
+.footer-geo-line-three {
+  width: 18vw;
+
+  right: 24%;
+  bottom: 18%;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.footer-label {
+  position: relative;
+
+  z-index: 5;
+
+  font-family: "New Title", sans-serif;
+
+  font-size: 28px;
+  font-weight: 700;
+
+  letter-spacing: -0.02em;
+}
+
+
+/* =========================================================
+   IDENTITY
+========================================================= */
+
+.footer-intro {
+  position: relative;
+
+  z-index: 5;
+
+  margin-top: 12vh;
+
+  width: min(
+    60vw,
+    850px
+  );
+}
+
+.footer-intro-main {
+  font-family: "New Title", sans-serif;
+
+  font-size: clamp(
+    72px,
+    8vw,
+    130px
+  );
+
+  font-weight: 700;
+
+  line-height: 0.82;
+
+  letter-spacing: -0.035em;
+}
+
+.footer-intro-sub {
+  margin-top: 24px;
+
+  max-width: 520px;
+
+  font-family: "New Title", sans-serif;
+
+  font-size: 22px;
+
+  line-height: 0.95;
+
+  font-weight: 500;
+}
+
+/* =========================================================
+   PRIMARY LINKS
+========================================================= */
+
+.footer-primary-links {
+  position: absolute;
+
+  left: 32px;
+  bottom: 115px;
+
+  display: flex;
+  flex-wrap: wrap;
+
+  gap: 10px 38px;
+
+  width: min(
+    62vw,
+    900px
+  );
+
+  z-index: 5;
+}
+
+.footer-link {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  color: #0a0a0a;
+
+  text-decoration: none;
+
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
+}
+
+.footer-link span {
+  font-size: 0.75em;
+}
+
+.footer-link-large {
+  font-family: "New Title", sans-serif;
+
+  font-size: 26px;
+
+  font-weight: 700;
+
+  letter-spacing: -0.015em;
+}
+
+.footer-link:hover {
+  opacity: 0.5;
+
+  transform:
+    translateX(4px);
+}
+
+
+/* =========================================================
+   CODING LINKS
+========================================================= */
+
+.footer-coding {
+  position: absolute;
+
+  right: 32px;
+  bottom: 120px;
+
+  z-index: 5;
+
+  width: 28vw;
+}
+
+.footer-coding-label {
+  margin-bottom: 14px;
+
+  font-size: 25px;
+
+  font-weight: 700;
+
+  letter-spacing: 0.08em;
+}
+
+.footer-coding-links {
+  display: grid;
+
+  grid-template-columns:
+    1fr 1fr;
+
+  gap: 10px 20px;
+}
+
+.footer-link-small {
+  font-size: 16px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.03em;
+}
+
+
+/* =========================================================
+   RESUME
+========================================================= */
+
+.footer-resume {
+  position: absolute;
+
+  right: 32px;
+  top: 40px;
+
+  z-index: 5;
+
+  color: #0a0a0a;
+
+  text-decoration: none;
+
+  font-family: "New Title", sans-serif;
+
+  font-size: 25px;
+
+  font-weight: 700;
+}
+
+.footer-resume span {
+  margin-left: 8px;
+}
+
+.footer-resume:hover {
+  opacity: 0.55;
+}
+
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.footer-bottom {
+  position: absolute;
+
+  left: 32px;
+  right: 32px;
+  bottom: 28px;
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  z-index: 5;
+
+  border-top: 1px solid
+    rgba(10, 10, 10, 0.25);
+
+  padding-top: 10px;
+
+  font-size: 15px;
+
+  font-weight: 600;
+
+  letter-spacing: 0.06em;
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 768px) {
+  .footer-section {
+    min-height: 78vh;
+
+    padding:
+      22px 18px 22px;
+  }
+
+  .footer-label {
+    font-size: 14px;
+  }
+
+  .footer-identity {
+    margin-top: 9vh;
+
+    width: 100%;
+  }
+
+  .footer-name {
+    font-size: 17vw;
+  }
+
+  .footer-subtitle {
+    font-size: 13px;
+
+    line-height: 1.3;
+  }
+
+  .footer-primary-links {
+    position: absolute;
+
+    left: 18px;
+    bottom: 150px;
+
+    width: calc(
+      100vw - 36px
+    );
+
+    gap: 10px 18px;
+  }
+
+  .footer-link-large {
+    font-size: 18px;
+  }
+
+  .footer-coding {
+    left: 18px;
+    right: auto;
+    bottom: 72px;
+
+    width: calc(
+      100vw - 36px
+    );
+  }
+
+  .footer-coding-links {
+    grid-template-columns:
+      1fr 1fr;
+  }
+
+  .footer-resume {
+    right: 18px;
+    top: 22px;
+
+    font-size: 13px;
+  }
+
+  .footer-bottom {
+    left: 18px;
+    right: 18px;
+    bottom: 18px;
+
+    font-size: 9px;
   }
 }

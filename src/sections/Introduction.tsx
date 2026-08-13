@@ -81,6 +81,104 @@ function Introduction() {
   const sectionRef =
     useRef<HTMLElement | null>(null);
 
+  /*
+   * Keep a direct reference to the
+   * Introduction ScrollTrigger so the
+   * SELECTED WORK button can jump to it.
+   */
+  const introTriggerRef =
+    useRef<ScrollTrigger | null>(null);
+
+  /*
+   * =========================================
+   * SELECTED WORK CLICK
+   * =========================================
+   */
+
+  const handleProjectCueClick = () => {
+    console.log("SELECTED WORK CLICKED");
+
+    const trigger =
+      introTriggerRef.current;
+
+    if (!trigger) {
+      console.error(
+        "Introduction ScrollTrigger not ready",
+      );
+      return;
+    }
+
+    /*
+     * ScrollTrigger.animation is typed
+     * generally as Animation, so cast it
+     * back to Timeline.
+     */
+    const timeline =
+      trigger.animation as
+        | gsap.core.Timeline
+        | undefined;
+
+    if (!timeline) {
+      console.error(
+        "Introduction timeline not found",
+      );
+      return;
+    }
+
+    /*
+     * We use the actual timeline label
+     * rather than getLabelTime().
+     */
+    const projectTime =
+      timeline.labels["project01"];
+
+    if (
+      typeof projectTime !== "number"
+    ) {
+      console.error(
+        "project01 label not found",
+      );
+      return;
+    }
+
+    const totalDuration =
+      timeline.duration();
+
+    if (totalDuration <= 0) {
+      return;
+    }
+
+    const progress =
+      projectTime /
+      totalDuration;
+
+    const targetScroll =
+      trigger.start +
+      progress *
+        (
+          trigger.end -
+          trigger.start
+        );
+
+    /*
+     * Scroll the actual page to the
+     * project01 point in the pinned
+     * Introduction timeline.
+     */
+    gsap.to(window, {
+      duration: 1.2,
+
+      ease: "power3.inOut",
+
+      scrollTo: {
+        y: targetScroll,
+        autoKill: false,
+      },
+
+      overwrite: true,
+    });
+  };
+
   useLayoutEffect(() => {
     const section =
       sectionRef.current;
@@ -89,14 +187,14 @@ function Introduction() {
       return;
     }
 
-    let projectScrollPosition = 0;
-
     const hoverCleanups:
       Array<() => void> = [];
 
-    /* =========================================
-       ELEMENT REFERENCES OUTSIDE CONTEXT
-    ========================================= */
+    /*
+     * =========================================
+     * ELEMENT REFERENCES OUTSIDE CONTEXT
+     * =========================================
+     */
 
     const projectCue =
       section.querySelector<HTMLElement>(
@@ -108,9 +206,11 @@ function Introduction() {
         ".intro-geo-shape, .intro-geo-line",
       );
 
-    /* =========================================
-       GEOMETRY POINTER INTERACTION
-    ========================================= */
+    /*
+     * =========================================
+     * GEOMETRY POINTER INTERACTION
+     * =========================================
+     */
 
     const handleIntroPointerMove = (
       event: PointerEvent,
@@ -119,12 +219,14 @@ function Introduction() {
         section.getBoundingClientRect();
 
       const mouseX =
-        (event.clientX - rect.left) /
+        (event.clientX -
+          rect.left) /
           rect.width -
         0.5;
 
       const mouseY =
-        (event.clientY - rect.top) /
+        (event.clientY -
+          rect.top) /
           rect.height -
         0.5;
 
@@ -143,7 +245,8 @@ function Introduction() {
             4 + index * 2.5;
 
           const rotationStrength =
-            0.8 + index * 0.35;
+            0.8 +
+            index * 0.35;
 
           gsap.to(element, {
             x:
@@ -193,52 +296,6 @@ function Introduction() {
         );
       };
 
-    /* =========================================
-       SELECTED WORK CLICK
-    ========================================= */
-
-    const handleProjectCueClick =
-      () => {
-        const trigger =
-          ScrollTrigger.getById(
-            "introductionScroll",
-          );
-
-        if (!trigger) {
-          return;
-        }
-
-        const timelineDuration =
-          trigger.animation?.duration();
-
-        if (
-          !timelineDuration ||
-          projectScrollPosition <= 0
-        ) {
-          return;
-        }
-
-        const targetScroll =
-          trigger.start +
-          (
-            projectScrollPosition /
-            timelineDuration
-          ) *
-            (
-              trigger.end -
-              trigger.start
-            );
-
-        gsap.to(window, {
-          duration: 1.15,
-
-          ease: "power3.inOut",
-
-          scrollTo:
-            targetScroll,
-        });
-      };
-
     section.addEventListener(
       "pointermove",
       handleIntroPointerMove,
@@ -249,14 +306,18 @@ function Introduction() {
       handleIntroPointerLeave,
     );
 
-    /* =========================================
-       GSAP CONTEXT
-    ========================================= */
+    /*
+     * =========================================
+     * GSAP CONTEXT
+     * =========================================
+     */
 
     const ctx = gsap.context(() => {
-      /* =======================================
-         ELEMENTS
-      ======================================= */
+      /*
+       * =======================================
+       * ELEMENTS
+       * =======================================
+       */
 
       const panels =
         gsap.utils.toArray<HTMLElement>(
@@ -273,9 +334,11 @@ function Introduction() {
           ".projects-stage",
         );
 
-      /* =======================================
-         HOVER TYPOGRAPHY
-      ======================================= */
+      /*
+       * =======================================
+       * HOVER TYPOGRAPHY
+       * =======================================
+       */
 
       const hoverWords =
         gsap.utils.toArray<HTMLElement>(
@@ -356,8 +419,8 @@ function Introduction() {
 
           let currentFont = "";
 
-          let timerIds: number[] =
-            [];
+          let timerIds:
+            number[] = [];
 
           const clearTimers = () => {
             timerIds.forEach(
@@ -388,7 +451,9 @@ function Introduction() {
 
             gsap.set(hover, {
               opacity: 0,
+
               scaleX: 1,
+
               transformOrigin:
                 "left center",
             });
@@ -463,15 +528,17 @@ function Introduction() {
 
                   gsap.to(base, {
                     opacity: 0,
-                    duration:
-                      0.06,
+
+                    duration: 0.06,
+
                     ease: "none",
                   });
 
                   gsap.to(hover, {
                     opacity: 1,
-                    duration:
-                      0.06,
+
+                    duration: 0.06,
+
                     ease: "none",
                   });
                 },
@@ -548,9 +615,11 @@ function Introduction() {
         },
       );
 
-      /* =======================================
-         INITIAL INTRO STATE
-      ======================================= */
+      /*
+       * =======================================
+       * INITIAL INTRO STATE
+       * =======================================
+       */
 
       panels.forEach(
         (panel, index) => {
@@ -586,9 +655,11 @@ function Introduction() {
         },
       );
 
-      /* =======================================
-         INITIAL PROJECT STATE
-      ======================================= */
+      /*
+       * =======================================
+       * INITIAL PROJECT STATE
+       * =======================================
+       */
 
       if (projectStage) {
         gsap.set(
@@ -613,9 +684,11 @@ function Introduction() {
         y: 40,
       });
 
-      /* =======================================
-         MASTER SCROLL TIMELINE
-      ======================================= */
+      /*
+       * =======================================
+       * MASTER SCROLL TIMELINE
+       * =======================================
+       */
 
       const timeline =
         gsap.timeline({
@@ -640,9 +713,19 @@ function Introduction() {
           },
         });
 
-      /* =======================================
-         INTRO STATEMENTS
-      ======================================= */
+      /*
+       * Store the ScrollTrigger instance
+       * for the SELECTED WORK button.
+       */
+
+      introTriggerRef.current =
+        timeline.scrollTrigger;
+
+      /*
+       * =======================================
+       * INTRO STATEMENTS
+       * =======================================
+       */
 
       panels.forEach(
         (panel, index) => {
@@ -664,7 +747,9 @@ function Introduction() {
             index <
             panels.length - 1
           ) {
-            /* CURRENT PANEL BREAKS APART */
+            /*
+             * CURRENT PANEL BREAKS APART
+             */
 
             lines.forEach(
               (
@@ -736,7 +821,9 @@ function Introduction() {
               "<0.25",
             );
 
-            /* NEXT PANEL */
+            /*
+             * NEXT PANEL
+             */
 
             const nextPanel =
               panels[index + 1];
@@ -845,10 +932,15 @@ function Introduction() {
                   line,
                   {
                     x: 0,
+
                     y: 0,
+
                     rotation: 0,
+
                     scaleX: 1,
+
                     scaleY: 1,
+
                     opacity: 1,
 
                     duration:
@@ -876,9 +968,13 @@ function Introduction() {
         },
       );
 
-      /* =======================================
-         FINAL INTRO PANEL
-      ======================================= */
+      /*
+       * =======================================
+       * FINAL INTRO PANEL
+       * =======================================
+       *
+       * Keep the final text visible.
+       */
 
       timeline.to(
         {},
@@ -887,38 +983,31 @@ function Introduction() {
         },
       );
 
-      /* =======================================
-         SELECTED WORK APPEARS
-      ======================================= */
+      /*
+       * =======================================
+       * SELECTED WORK APPEARS
+       * =======================================
+       */
 
       timeline.to(
         projectCue,
         {
           opacity: 1,
+
           y: 0,
 
           duration: 0.5,
 
-          ease:
-            "power3.out",
+          ease: "power3.out",
         },
         "+=0.1",
       );
 
-      /* =======================================
-         PROJECT TRANSITION LABEL
-      ======================================= */
-
-      timeline.addLabel(
-        "projects",
-      );
-
-      projectScrollPosition =
-        timeline.duration();
-
-      /* =======================================
-         INTRO GEOMETRY → LEFT
-      ======================================= */
+      /*
+       * =======================================
+       * INTRO GEOMETRY → LEFT
+       * =======================================
+       */
 
       timeline.to(
         geometryElements,
@@ -931,14 +1020,15 @@ function Introduction() {
 
           duration: 1.2,
 
-          ease:
-            "power3.inOut",
+          ease: "power3.inOut",
         },
       );
 
-      /* =======================================
-         INTRODUCTION → LEFT
-      ======================================= */
+      /*
+       * =======================================
+       * INTRODUCTION → LEFT
+       * =======================================
+       */
 
       timeline.to(
         ".introduction-content",
@@ -948,15 +1038,16 @@ function Introduction() {
 
           duration: 1.2,
 
-          ease:
-            "power3.inOut",
+          ease: "power3.inOut",
         },
         "<",
       );
 
-      /* =======================================
-         PROJECTS → FROM RIGHT
-      ======================================= */
+      /*
+       * =======================================
+       * PROJECTS → FROM RIGHT
+       * =======================================
+       */
 
       if (projectStage) {
         timeline.to(
@@ -966,16 +1057,28 @@ function Introduction() {
 
             duration: 1.2,
 
-            ease:
-              "power3.inOut",
+            ease: "power3.inOut",
           },
           "<",
         );
       }
 
-      /* =======================================
-         PROJECTS BREATHING ROOM
-      ======================================= */
+      /*
+       * IMPORTANT:
+       *
+       * This label is placed AFTER
+       * Project 01 has fully entered.
+       */
+
+      timeline.addLabel(
+        "project01",
+      );
+
+      /*
+       * =======================================
+       * PROJECTS BREATHING ROOM
+       * =======================================
+       */
 
       timeline.to(
         {},
@@ -984,85 +1087,85 @@ function Introduction() {
         },
       );
 
-      /* =======================================
-         HORIZONTAL PROJECT TRACK
-      ======================================= */
+      /*
+       * =======================================
+       * HORIZONTAL PROJECT TRACK
+       * =======================================
+       */
 
       if (projectTrack) {
         /*
-         * =========================================
          * PROJECT 01 — HOLD
-         * =========================================
          */
-      
-        timeline.to({}, {
-          duration: 1.4,
-        });
-      
+
+        timeline.to(
+          {},
+          {
+            duration: 1.4,
+          },
+        );
+
         /*
-         * =========================================
          * PROJECT 01 → PROJECT 02
-         * =========================================
          */
-      
+
         timeline.to(
           projectTrack,
           {
             x: "-100vw",
+
             duration: 1.2,
-            ease: "power2.inOut",
+
+            ease:
+              "power2.inOut",
           },
         );
-      
+
         /*
-         * =========================================
-         * PROJECT 02 — LONGER READING TIME
-         * =========================================
+         * PROJECT 02 — LONGER HOLD
          */
-      
-        timeline.to({}, {
-          duration: 2.2,
-        });
-      
+
+        timeline.to(
+          {},
+          {
+            duration: 2.2,
+          },
+        );
+
         /*
-         * =========================================
          * PROJECT 02 → PROJECT 03
-         * =========================================
          */
-      
+
         timeline.to(
           projectTrack,
           {
             x: "-200vw",
+
             duration: 1.2,
-            ease: "power2.inOut",
+
+            ease:
+              "power2.inOut",
           },
         );
-      
+
         /*
-         * =========================================
          * PROJECT 03 — HOLD
-         * =========================================
          */
-      
-        timeline.to({}, {
-          duration: 2.0,
-        });
+
+        timeline.to(
+          {},
+          {
+            duration: 2.0,
+          },
+        );
       }
     }, section);
 
-    /* =========================================
-       CLICK LISTENER
-    ========================================= */
-
-    projectCue?.addEventListener(
-      "click",
-      handleProjectCueClick,
-    );
-
-    /* =========================================
-       CLEANUP
-    ========================================= */
+    /*
+     * =========================================
+     * CLEANUP
+     * =========================================
+     */
 
     return () => {
       section.removeEventListener(
@@ -1075,15 +1178,13 @@ function Introduction() {
         handleIntroPointerLeave,
       );
 
-      projectCue?.removeEventListener(
-        "click",
-        handleProjectCueClick,
-      );
-
       hoverCleanups.forEach(
         (cleanup) =>
           cleanup(),
       );
+
+      introTriggerRef.current =
+        null;
 
       ctx.revert();
     };
@@ -1211,6 +1312,9 @@ function Introduction() {
         <button
           type="button"
           className="intro-project-cue"
+          onClick={
+            handleProjectCueClick
+          }
         >
           <span>
             SELECTED WORK

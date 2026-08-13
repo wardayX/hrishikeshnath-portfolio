@@ -37,7 +37,7 @@ const projects = [
   
     {
       number: "03",
-      title: "IMAGE MERGER",
+      title: "MULTI-MODEL IMAGE FUSION",
       description:
         "An AI image-merging experiment combining multimodal models and generation.",
       features: [
