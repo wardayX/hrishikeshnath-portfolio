@@ -186,6 +186,7 @@ function Introduction() {
     if (!section) {
       return;
     }
+  
 
     const hoverCleanups:
       Array<() => void> = [];

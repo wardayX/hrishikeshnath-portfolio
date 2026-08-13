@@ -17,7 +17,16 @@ function IntroPrototype() {
     if (!section || !background) {
       return;
     }
+      
+    const isMobile = window.innerWidth <= 768;
 
+    if (isMobile) {
+      ScrollTrigger.normalizeScroll({
+        type: "touch",
+        momentum: (self: any) =>
+      Math.min(0.4, Math.abs(self.velocityY) / 5000),
+      });
+    }
     const scrollHint = section.querySelector<HTMLElement>(
       ".prototype-scroll-hint",
     );
