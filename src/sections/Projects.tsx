@@ -175,7 +175,7 @@ const projects = [
               ================================== */}
   
               <div className="project-bottom-label">
-                SCROLL →
+                SCROLL
               </div>
             </article>
           ))}

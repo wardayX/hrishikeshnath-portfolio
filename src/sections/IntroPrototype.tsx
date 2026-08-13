@@ -13,24 +13,30 @@ function IntroPrototype() {
   useLayoutEffect(() => {
     const section = sectionRef.current;
     const background = backgroundRef.current;
+
     if (!section || !background) {
       return;
     }
-    const scrollHint =
-      section.querySelector<HTMLElement>(
-        ".prototype-scroll-hint",
-      );
-      
-    let handlePointerMove: ((event: PointerEvent) => void) | undefined;
+
+    const scrollHint = section.querySelector<HTMLElement>(
+      ".prototype-scroll-hint",
+    );
+
+    let handlePointerMove:
+      | ((event: PointerEvent) => void)
+      | undefined;
+
     let jumbleWords: HTMLElement[] = [];
-      const ctx = gsap.context(() => {
-        const helloLetters = gsap.utils.toArray<HTMLElement>(
-          ".prototype-letter",
-          );
-        const geometry = gsap.utils.toArray<HTMLElement>(
-            ".brutalist-shape, .brutalist-line",
-          );
-          
+
+    const ctx = gsap.context(() => {
+      const helloLetters = gsap.utils.toArray<HTMLElement>(
+        ".prototype-letter",
+      );
+
+      const geometry = gsap.utils.toArray<HTMLElement>(
+        ".brutalist-shape, .brutalist-line",
+      );
+
       const decoyLetters = gsap.utils.toArray<HTMLElement>(
         ".decoy-letter",
       );
@@ -55,7 +61,7 @@ function IntroPrototype() {
       gsap.set(".prototype-real-hello", {
         opacity: 0,
       });
-      
+
       gsap.set(helloLetters, {
         opacity: 1,
         x: 0,
@@ -66,9 +72,9 @@ function IntroPrototype() {
       });
 
       /*
+       * =========================================
        * DECOY LETTERS
-       *
-       * Start with nothing visible.
+       * =========================================
        */
 
       gsap.set(decoyLetters, {
@@ -76,7 +82,9 @@ function IntroPrototype() {
       });
 
       /*
+       * =========================================
        * I AM + NAME
+       * =========================================
        */
 
       gsap.set(".prototype-iam", {
@@ -93,7 +101,7 @@ function IntroPrototype() {
         scale: 0.96,
         x: 0,
         y: 0,
-        });
+      });
 
       /*
        * =========================================
@@ -142,7 +150,6 @@ function IntroPrototype() {
           duration: 0.08,
           ease: "power2.out",
         });
-        
 
       /*
        * Seamless handoff:
@@ -206,10 +213,13 @@ function IntroPrototype() {
           0.15,
         );
       }
-      
-      timeline.to({}, {
-        duration: 0.35,
-      });
+
+      timeline.to(
+        {},
+        {
+          duration: 0.35,
+        },
+      );
 
       /*
        * =========================================
@@ -383,6 +393,7 @@ function IntroPrototype() {
        * PHASE 7 — NAME
        * =========================================
        */
+
       timeline.to(
         ".prototype-name",
         {
@@ -410,7 +421,7 @@ function IntroPrototype() {
         },
         3.12,
       );
-      
+
       timeline.fromTo(
         ".prototype-name-last",
         {
@@ -426,6 +437,26 @@ function IntroPrototype() {
           ease: "power4.out",
         },
         3.28,
+      );
+
+      /*
+       * =========================================
+       * PHASE 7.5 — NAME HOLD
+       * =========================================
+       *
+       * HRISHIKESH NATH is now fully visible.
+       *
+       * We intentionally leave an empty section
+       * in the timeline so the name stays still
+       * while the user continues scrolling.
+       */
+
+      timeline.to(
+        {},
+        {
+          duration: 1.4,
+        },
+        4.05,
       );
 
       /*
@@ -464,28 +495,38 @@ function IntroPrototype() {
         );
       });
 
+      /*
+       * =========================================
+       * GEOMETRY MOUSE PARALLAX
+       * =========================================
+       */
+
       handlePointerMove = (event: PointerEvent) => {
         const scrollTrigger = ScrollTrigger.getAll().find(
           (trigger) => trigger.trigger === section,
         );
-      
+
         const progress = scrollTrigger?.progress ?? 0;
-      
+
         if (progress < 0.55) {
           return;
         }
-      
+
         const rect = section.getBoundingClientRect();
-      
+
         const mouseX =
-          (event.clientX - rect.left) / rect.width - 0.5;
-      
+          (event.clientX - rect.left) /
+            rect.width -
+          0.5;
+
         const mouseY =
-          (event.clientY - rect.top) / rect.height - 0.5;
-      
+          (event.clientY - rect.top) /
+            rect.height -
+          0.5;
+
         geometry.forEach((shape, index) => {
           const strength = 8 + index * 3;
-      
+
           gsap.to(shape, {
             x: mouseX * strength,
             y: mouseY * strength * 0.7,
@@ -495,90 +536,106 @@ function IntroPrototype() {
           });
         });
       };
-      
+
       section.addEventListener(
         "pointermove",
         handlePointerMove,
       );
-      
+
+      /*
+       * =========================================
+       * TEXT JUMBLE EFFECT
+       * =========================================
+       */
+
       jumbleWords =
-          gsap.utils.toArray<HTMLElement>(
-            ".name-jumble",
+        gsap.utils.toArray<HTMLElement>(
+          ".name-jumble",
+        );
+
+      const shuffleText = (text: string) => {
+        const characters = text.split("");
+
+        for (
+          let i = characters.length - 1;
+          i > 0;
+          i--
+        ) {
+          const j = Math.floor(
+            Math.random() * (i + 1),
           );
 
-        const shuffleText = (text: string) => {
-          const characters = text.split("");
+          [
+            characters[i],
+            characters[j],
+          ] = [
+            characters[j],
+            characters[i],
+          ];
+        }
+
+        return characters.join("");
+      };
+
+      jumbleWords.forEach((word) => {
+        let timerIds: number[] = [];
+
+        word.addEventListener("mouseenter", () => {
+          const original =
+            word.dataset.text ?? "";
+
+          timerIds.forEach((id) => {
+            window.clearTimeout(id);
+          });
+
+          timerIds = [];
+
+          const passes = 4;
+          const duration = 250;
+          const interval =
+            duration / passes;
 
           for (
-            let i = characters.length - 1;
-            i > 0;
-            i--
+            let i = 0;
+            i < passes;
+            i++
           ) {
-            const j = Math.floor(
-              Math.random() * (i + 1),
-            );
+            const id = window.setTimeout(() => {
+              word.textContent =
+                shuffleText(original);
+            }, i * interval);
 
-            [
-              characters[i],
-              characters[j],
-            ] = [
-              characters[j],
-              characters[i],
-            ];
+            timerIds.push(id);
           }
 
-          return characters.join("");
-        };
+          const restoreId =
+            window.setTimeout(() => {
+              word.textContent = original;
+            }, duration);
 
-        jumbleWords.forEach((word) => {
-          let timerIds: number[] = [];
-
-          word.addEventListener("mouseenter", () => {
-            const original =
-              word.dataset.text ?? "";
-
-            timerIds.forEach((id) => {
-              window.clearTimeout(id);
-            });
-
-            timerIds = [];
-
-            const passes = 4;
-            const duration = 250;
-            const interval = duration / passes;
-
-            for (let i = 0; i < passes; i++) {
-              const id = window.setTimeout(() => {
-                word.textContent =
-                  shuffleText(original);
-              }, i * interval);
-
-              timerIds.push(id);
-            }
-
-            const restoreId =
-              window.setTimeout(() => {
-                word.textContent = original;
-              }, duration);
-
-            timerIds.push(restoreId);
-          });
-
-          word.addEventListener("mouseleave", () => {
-            const original =
-              word.dataset.text ?? "";
-
-            timerIds.forEach((id) => {
-              window.clearTimeout(id);
-            });
-
-            timerIds = [];
-
-            word.textContent = original;
-          });
+          timerIds.push(restoreId);
         });
 
+        word.addEventListener("mouseleave", () => {
+          const original =
+            word.dataset.text ?? "";
+
+          timerIds.forEach((id) => {
+            window.clearTimeout(id);
+          });
+
+          timerIds = [];
+
+          word.textContent = original;
+        });
+      });
     }, section);
+
+    /*
+     * =========================================
+     * CLEANUP
+     * =========================================
+     */
 
     return () => {
       if (handlePointerMove) {
@@ -587,11 +644,12 @@ function IntroPrototype() {
           handlePointerMove,
         );
       }
+
       jumbleWords.forEach((word) => {
         word.textContent =
           word.dataset.text ?? "";
       });
-    
+
       ctx.revert();
     };
   }, []);
@@ -606,52 +664,61 @@ function IntroPrototype() {
         className="prototype-background"
       />
 
-        <div className="prototype-content">
+      <div className="prototype-content">
 
         {/* HELLO STAGE */}
         <div className="hello-stage">
 
           <div className="prototype-decoy-hello">
-            {"HELLO.".split("").map((letter, index) => (
-              <span
-                key={`${letter}-${index}`}
-                className="decoy-letter"
-              >
-                {letter}
-              </span>
-            ))}
+            {"HELLO.".split("").map(
+              (letter, index) => (
+                <span
+                  key={`${letter}-${index}`}
+                  className="decoy-letter"
+                >
+                  {letter}
+                </span>
+              ),
+            )}
           </div>
 
           <div className="prototype-real-hello">
             <div className="prototype-word">
-              {letters.map((letter, index) => (
-                <span
-                  key={`${letter}-${index}`}
-                  className="prototype-letter"
-                >
-                  {letter}
-                </span>
-              ))}
+              {letters.map(
+                (letter, index) => (
+                  <span
+                    key={`${letter}-${index}`}
+                    className="prototype-letter"
+                  >
+                    {letter}
+                  </span>
+                ),
+              )}
             </div>
           </div>
 
         </div>
+
+        {/* BRUTALIST BACKGROUND */}
         <div
-              className="brutalist-background"
-              aria-hidden="true"
-            >
-              <div className="brutalist-shape shape-one" />
-              <div className="brutalist-shape shape-two" />
-              <div className="brutalist-shape shape-three" />
-              <div className="brutalist-line line-one" />
-              <div className="brutalist-line line-two" />
+          className="brutalist-background"
+          aria-hidden="true"
+        >
+          <div className="brutalist-shape shape-one" />
+          <div className="brutalist-shape shape-two" />
+          <div className="brutalist-shape shape-three" />
+
+          <div className="brutalist-line line-one" />
+          <div className="brutalist-line line-two" />
         </div>
 
         {/* I AM */}
-        <div className="prototype-iam name-jumble" data-text="I AM">
+        <div
+          className="prototype-iam name-jumble"
+          data-text="I AM"
+        >
           I AM
         </div>
-
 
         {/* NAME */}
         <div className="prototype-name">
@@ -672,15 +739,18 @@ function IntroPrototype() {
 
         </div>
 
-
-        {/* SCROLL HINT — IMPORTANT:
-            outside hello-stage */}
+        {/* SCROLL HINT */}
         <div className="prototype-scroll-hint">
-          <span>EXPLORE THE JOURNEY</span>
-          <span className="prototype-scroll-arrow">↓</span>
+          <span>
+            EXPLORE THE JOURNEY
+          </span>
+
+          <span className="prototype-scroll-arrow">
+            ↓
+          </span>
         </div>
 
-        </div>
+      </div>
     </section>
   );
 }

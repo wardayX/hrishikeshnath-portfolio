@@ -6,6 +6,7 @@
   font-style: normal;
   font-display: swap;
 }
+
 /* =========================================================
    CLASH GROTESK
 ========================================================= */
@@ -14,12 +15,10 @@
   font-family: "Clash Grotesk";
   src: url("/fonts/ClashGrotesk_Complete/Fonts/WEB/fonts/ClashGrotesk-Variable.woff2")
     format("woff2");
-
   font-weight: 200 700;
   font-style: normal;
   font-display: swap;
 }
-
 
 /* =========================================================
    NIPPO
@@ -29,17 +28,14 @@
   font-family: "Nippo";
   src: url("/fonts/Nippo_Complete/Fonts/WEB/fonts/Nippo-Variable.woff2")
     format("woff2");
-
   font-weight: 200 700;
   font-style: normal;
   font-display: swap;
 }
 
-
 /* =========================================================
    STYRO
 ========================================================= */
-
 
 /* =========================================================
    BOSKA
@@ -49,12 +45,10 @@
   font-family: "Boska";
   src: url("/fonts/Boska_Complete/Fonts/WEB/fonts/Boska-Variable.woff2")
     format("woff2");
-
   font-weight: 200 700;
   font-style: normal;
   font-display: swap;
 }
-
 
 /* =========================================================
    TELMA
@@ -64,12 +58,10 @@
   font-family: "Telma";
   src: url("/fonts/Telma_Complete/Fonts/WEB/fonts/Telma-Variable.woff2")
     format("woff2");
-
   font-weight: 200 700;
   font-style: normal;
   font-display: swap;
 }
-
 
 /* =========================================================
    AKTURA
@@ -79,12 +71,10 @@
   font-family: "Aktura";
   src: url("/fonts/Aktura_Complete/Fonts/WEB/fonts/Aktura-Variable.woff2")
     format("woff2");
-
   font-weight: 200 700;
   font-style: normal;
   font-display: swap;
 }
-
 
 /* =========================================================
    BRITNEY
@@ -94,11 +84,14 @@
   font-family: "Britney";
   src: url("/fonts/Britney_Complete/Fonts/WEB/fonts/Britney-Variable.woff2")
     format("woff2");
-
   font-weight: 100 900;
   font-style: normal;
   font-display: swap;
 }
+
+/* =========================================================
+   GLOBAL
+========================================================= */
 
 :root {
   font-family: "New Title", sans-serif;
@@ -106,7 +99,7 @@
   background: #000000;
 }
 
-*{
+* {
   box-sizing: border-box;
 }
 
@@ -137,7 +130,6 @@ body {
   min-height: 100vh;
 }
 
-
 /* =========================================================
    PROTOTYPE
 ========================================================= */
@@ -152,20 +144,16 @@ body {
 .prototype-background {
   position: absolute;
   inset: 0;
-
   width: 100%;
   height: 100%;
-
   background: #000000;
   z-index: 0;
 }
 
 .prototype-content {
   position: relative;
-
   width: 100%;
   height: 100%;
-
   z-index: 1;
 }
 
@@ -175,7 +163,6 @@ body {
 
 .prototype-scroll-hint {
   position: absolute;
-
   right: 32px;
   bottom: 28px;
 
@@ -184,16 +171,12 @@ body {
   gap: 10px;
 
   color: #ffffff;
-
   font-family: "New Title", sans-serif;
-
   font-size: 17px;
   font-weight: 500;
-
   letter-spacing: 0.04em;
 
   z-index: 10;
-
   pointer-events: none;
 
   transition:
@@ -203,9 +186,7 @@ body {
 
 .prototype-scroll-arrow {
   display: inline-block;
-
   font-size: 18px;
-
   animation: scrollHint 2s ease-in-out infinite;
 }
 
@@ -238,12 +219,9 @@ body {
   z-index: 5;
 }
 
-
 /* =========================================================
    DECOY HELLO
 ========================================================= */
-
-
 
 /* =========================================================
    REAL HELLO
@@ -251,12 +229,9 @@ body {
 
 .prototype-real-hello {
   position: relative;
-
   opacity: 0;
-
   z-index: 1;
 }
-
 
 /* =========================================================
    REAL WORD
@@ -266,7 +241,6 @@ body {
   position: relative;
 
   display: flex;
-
   margin: 0;
 
   font-family: "New Title", sans-serif;
@@ -278,23 +252,18 @@ body {
   );
 
   font-weight: 700;
-
   line-height: 0.75;
-
   letter-spacing: -0.02em;
 
   color: #ffffff;
-
   white-space: nowrap;
 }
 
 .prototype-letter {
   display: inline-block;
-
   position: relative;
 
   transform-origin: center center;
-
   will-change: transform;
 }
 
@@ -305,7 +274,6 @@ body {
   left: 0;
 
   display: flex;
-
   margin: 0;
 
   font-family: "New Title", sans-serif;
@@ -317,30 +285,23 @@ body {
   );
 
   font-weight: 700;
-
   line-height: 0.75;
-
   letter-spacing: -0.02em;
 
   color: #ffffff;
-
   white-space: nowrap;
 
   transform-origin: center center;
-
   opacity: 1;
-
   z-index: 2;
 }
 
 .decoy-letter {
   display: inline-block;
-
   margin: 0;
   padding: 0;
 
   opacity: 0;
-
   transform: none;
 }
 
@@ -365,7 +326,6 @@ body {
   );
 
   font-weight: 500;
-
   line-height: 1;
   letter-spacing: -0.02em;
 
@@ -378,12 +338,9 @@ body {
   z-index: 6;
 }
 
-
 /* =========================================================
    NAME
 ========================================================= */
-
-
 
 .prototype-name {
   position: absolute;
@@ -404,12 +361,10 @@ body {
   );
 
   font-weight: 700;
-
   line-height: 0.78;
   letter-spacing: 0;
 
   text-transform: uppercase;
-
   white-space: nowrap;
 
   opacity: 0;
@@ -425,13 +380,11 @@ body {
   display: block;
 
   width: max-content;
-
   margin: 0;
 
   white-space: nowrap;
 
   transform: scaleX(1.25) scaleY(1.6);
-
   transform-origin: left top;
 
   will-change:
@@ -450,37 +403,6 @@ body {
   margin-top: 0.47em;
 }
 
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 768px) {
-  .prototype-iam {
-    left: 18px;
-    top: 13vh;
-
-    font-size: 28px;
-  }
-
-  .prototype-name {
-    left: 18px;
-    top: 20vh;
-
-    width: calc(100vw - 36px);
-
-    font-size: 21vw;
-  }
-
-  .prototype-name-line {
-    transform: scaleX(1.05) scaleY(1.3);
-  }
-
-  .prototype-name-last {
-    margin-top: 0.35em;
-  }
-}
-
 /* =========================================================
    BRUTALIST BACKGROUND
 ========================================================= */
@@ -495,6 +417,7 @@ body {
   overflow: hidden;
 
   pointer-events: none;
+
   opacity: 0;
   will-change: opacity;
 
@@ -567,6 +490,7 @@ body {
   background: #0a0a0a;
   border: 0;
 }
+
 /* =========================================================
    INTRODUCTION
 ========================================================= */
@@ -601,7 +525,6 @@ body {
 
   z-index: 10;
 }
-
 
 /* =========================================================
    RIGHT-SIDE GEOMETRY
@@ -722,7 +645,6 @@ body {
   bottom: 16%;
 }
 
-
 /* =========================================================
    HEADER
 ========================================================= */
@@ -745,7 +667,6 @@ body {
   pointer-events: none;
 }
 
-
 /* =========================================================
    PANELS
 ========================================================= */
@@ -766,7 +687,6 @@ body {
 
   display: flex;
   flex-direction: column;
-
   justify-content: center;
 
   padding: 80px 32px;
@@ -789,7 +709,6 @@ body {
   );
 
   font-weight: 700;
-
   line-height: 0.82;
 
   letter-spacing: -0.025em;
@@ -803,7 +722,6 @@ body {
   display: block;
 
   width: max-content;
-
   max-width: none;
 
   overflow: visible;
@@ -815,7 +733,6 @@ body {
     opacity;
 }
 
-
 /* =========================================================
    HOVER TYPOGRAPHY
 ========================================================= */
@@ -826,11 +743,9 @@ body {
   display: inline-grid;
 
   width: max-content;
-
   max-width: none;
 
   cursor: default;
-
   user-select: none;
 
   pointer-events: auto;
@@ -847,7 +762,6 @@ body {
   display: block;
 
   width: max-content;
-
   max-width: none;
 
   margin: 0;
@@ -860,7 +774,6 @@ body {
 
 .intro-word-base {
   font-family: "New Title", sans-serif;
-
   opacity: 1;
 }
 
@@ -868,12 +781,10 @@ body {
   font-family: "New Title", sans-serif;
 
   opacity: 0;
-
   pointer-events: none;
 
   overflow: visible;
 }
-
 
 /* =========================================================
    INTRO COMPOSITIONS
@@ -930,7 +841,6 @@ body {
   width: 92vw;
 }
 
-
 /* =========================================================
    SELECTED WORK
 ========================================================= */
@@ -950,7 +860,6 @@ body {
   padding: 0;
 
   background: transparent;
-
   color: #0a0a0a;
 
   opacity: 0;
@@ -967,6 +876,7 @@ body {
 
   cursor: pointer;
   pointer-events: auto;
+
   z-index: 100;
 }
 
@@ -977,7 +887,6 @@ body {
 .intro-project-arrow {
   font-size: 24px;
 }
-
 
 /* =========================================================
    SCROLL
@@ -1001,13 +910,8 @@ body {
   pointer-events: none;
 }
 
-
 /* =========================================================
    PROJECT STAGE
-========================================================= */
-
-/* =========================================================
-   PROJECT IMAGE
 ========================================================= */
 
 .project-image {
@@ -1028,7 +932,6 @@ body {
   opacity: 0.92;
 }
 
-
 /* =========================================================
    PROJECT LIGHTBOX
 ========================================================= */
@@ -1045,7 +948,12 @@ body {
 
   padding: 60px;
 
-  background: rgba(243, 241, 236, 0.98);
+  background: rgba(
+    243,
+    241,
+    236,
+    0.98
+  );
 
   z-index: 9999;
 }
@@ -1089,6 +997,10 @@ body {
 .project-lightbox-close:hover {
   opacity: 0.55;
 }
+
+/* =========================================================
+   PROJECTS STAGE
+========================================================= */
 
 .projects-stage {
   position: absolute;
@@ -1137,7 +1049,6 @@ body {
 
   overflow: hidden;
 }
-
 
 /* =========================================================
    PROJECT TEXT
@@ -1222,7 +1133,12 @@ body {
   display: block;
 
   border-top: 1px solid
-    rgba(10, 10, 10, 0.35);
+    rgba(
+      10,
+      10,
+      10,
+      0.35
+    );
 
   padding-top: 8px;
 }
@@ -1231,6 +1147,7 @@ body {
   display: inline-flex;
 
   align-items: center;
+
   gap: 12px;
 
   border: 0;
@@ -1391,8 +1308,6 @@ body {
     rotate(-18deg);
 }
 
-
-
 /* =========================================================
    PROJECT FOOTER CUE
 ========================================================= */
@@ -1409,123 +1324,6 @@ body {
 
   font-weight: 700;
 }
-
-
-/* =========================================================
-   MOBILE
-========================================================= */
-
-@media (max-width: 768px) {
-  .intro-index {
-    top: 20px;
-    left: 18px;
-
-    font-size: 14px;
-  }
-
-  .intro-panel {
-    padding: 80px 18px;
-  }
-
-  .intro-copy {
-    width:
-      calc(100vw - 36px);
-
-    font-size: 16vw;
-
-    line-height: 0.8;
-  }
-
-  .intro-layout-left .intro-copy,
-  .intro-layout-wide .intro-copy,
-  .intro-layout-center .intro-copy,
-  .intro-layout-right .intro-copy,
-  .intro-layout-bottom .intro-copy {
-    left: 18px;
-    right: auto;
-
-    top: auto;
-    bottom: auto;
-
-    width:
-      calc(100vw - 36px);
-
-    transform: none;
-
-    text-align: left;
-  }
-
-  .intro-layout-left .intro-copy {
-    top: 25vh;
-  }
-
-  .intro-layout-wide .intro-copy {
-    top: 20vh;
-  }
-
-  .intro-layout-center .intro-copy {
-    top: 50%;
-    transform:
-      translateY(-50%);
-  }
-
-  .intro-layout-right .intro-copy {
-    top: 25vh;
-  }
-
-  .intro-layout-bottom .intro-copy {
-    bottom: 20vh;
-  }
-
-  .intro-project-cue {
-    left: 18px;
-    bottom: 20px;
-
-    font-size: 14px;
-  }
-
-  .intro-scroll {
-    right: 18px;
-    bottom: 20px;
-
-    font-size: 13px;
-  }
-
-  .projects-header {
-    left: 18px;
-    top: 20px;
-
-    font-size: 14px;
-  }
-
-  .project-info {
-    right: 18px;
-    top: 18vh;
-
-    width: 48vw;
-  }
-
-  .project-info h2 {
-    font-size: 11vw;
-  }
-
-  .project-info p {
-    font-size: 16px;
-  }
-
-  .project-features {
-    font-size: 14px;
-  }
-
-  .project-visual {
-    left: 4vw;
-
-    width: 50vw;
-    height: 55vh;
-  }
-}
-
-
 
 /* =========================================================
    FOOTER / CONTACT
@@ -1548,6 +1346,7 @@ body {
 
   box-sizing: border-box;
 }
+
 .footer-background {
   position: absolute;
   inset: 0;
@@ -1557,9 +1356,8 @@ body {
   z-index: 0;
 }
 
-
 /* =========================================================
-   GEOMETRY
+   FOOTER GEOMETRY
 ========================================================= */
 
 .footer-geometry {
@@ -1652,9 +1450,8 @@ body {
   bottom: 18%;
 }
 
-
 /* =========================================================
-   HEADER
+   FOOTER HEADER
 ========================================================= */
 
 .footer-label {
@@ -1670,9 +1467,8 @@ body {
   letter-spacing: -0.02em;
 }
 
-
 /* =========================================================
-   IDENTITY
+   FOOTER IDENTITY
 ========================================================= */
 
 .footer-intro {
@@ -1778,7 +1574,6 @@ body {
     translateX(4px);
 }
 
-
 /* =========================================================
    CODING LINKS
 ========================================================= */
@@ -1821,7 +1616,6 @@ body {
   letter-spacing: 0.03em;
 }
 
-
 /* =========================================================
    RESUME
 ========================================================= */
@@ -1853,9 +1647,8 @@ body {
   opacity: 0.55;
 }
 
-
 /* =========================================================
-   BOTTOM
+   FOOTER BOTTOM
 ========================================================= */
 
 .footer-bottom {
@@ -1874,7 +1667,12 @@ body {
   z-index: 5;
 
   border-top: 1px solid
-    rgba(10, 10, 10, 0.25);
+    rgba(
+      10,
+      10,
+      10,
+      0.25
+    );
 
   padding-top: 10px;
 
@@ -1885,83 +1683,896 @@ body {
   letter-spacing: 0.06em;
 }
 
-
 /* =========================================================
    MOBILE
 ========================================================= */
 
 @media (max-width: 768px) {
-  .footer-section {
-    min-height: 78vh;
 
-    padding:
-      22px 18px 22px;
+  /* =======================================================
+     PROTOTYPE / HELLO
+  ======================================================= */
+
+  .prototype-section {
+    width: 100vw;
+    min-height: 100vh;
   }
 
-  .footer-label {
+  .prototype-scroll-hint {
+    right: 18px;
+    bottom: 20px;
+
+    font-size: 13px;
+  }
+
+  .prototype-word,
+  .prototype-decoy-hello {
+    font-size: clamp(
+      100px,
+      24vw,
+      220px
+    );
+  }
+
+  .prototype-iam {
+    left: 18px;
+    top: 13vh;
+
+    font-size: 28px;
+  }
+
+  .prototype-name {
+    left: 18px;
+    top: 20vh;
+
+    width: calc(100vw - 36px);
+
+    font-size: 30vw;
+
+    line-height: 0.78;
+  }
+
+  .prototype-name-line {
+    transform:
+      scaleX(1.05)
+      scaleY(1.3);
+  }
+
+  .prototype-name-last {
+    margin-top: 0.35em;
+  }
+
+
+  /* =======================================================
+     INTRODUCTION
+  ======================================================= */
+
+  .introduction-section {
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+  }
+
+  .intro-index {
+    top: 20px;
+    left: 18px;
+
     font-size: 14px;
   }
 
-  .footer-identity {
-    margin-top: 9vh;
-
-    width: 100%;
+  .intro-panel {
+    padding: 80px 18px;
   }
 
-  .footer-name {
-    font-size: 17vw;
+  .intro-copy {
+    width: calc(100vw - 36px);
+    max-width: calc(100vw - 36px);
+
+    box-sizing: border-box;
+
+    font-size: 16vw;
+    line-height: 0.8;
+
+    overflow: visible;
   }
 
-  .footer-subtitle {
-    font-size: 13px;
-
-    line-height: 1.3;
+  .intro-copy > * {
+    max-width: 100%;
   }
 
-  .footer-primary-links {
-    position: absolute;
+  .intro-line {
+    width: auto;
+    max-width: 100%;
+
+    overflow: visible;
+
+    white-space: normal;
+  }
+
+  .intro-hover-word {
+    max-width: 100%;
+
+    white-space: normal;
+  }
+
+  .intro-word-base,
+  .intro-word-hover {
+    max-width: 100%;
+
+    white-space: normal;
+  }
+
+
+  /* -------------------------------------------------------
+     INTRO LAYOUTS
+  ------------------------------------------------------- */
+
+  .intro-layout-left .intro-copy,
+  .intro-layout-wide .intro-copy,
+  .intro-layout-center .intro-copy,
+  .intro-layout-right .intro-copy,
+  .intro-layout-bottom .intro-copy {
 
     left: 18px;
-    bottom: 150px;
+    right: auto;
 
-    width: calc(
-      100vw - 36px
-    );
+    top: auto;
+    bottom: auto;
 
-    gap: 10px 18px;
+    width: calc(100vw - 36px);
+    max-width: calc(100vw - 36px);
+
+    transform: none;
+
+    text-align: left;
   }
 
-  .footer-link-large {
+  .intro-layout-left .intro-copy {
+    top: 25vh;
+  }
+
+  .intro-layout-wide .intro-copy {
+    top: 20vh;
+  }
+
+  .intro-layout-center .intro-copy {
+    top: 50%;
+
+    transform:
+      translateY(-50%);
+  }
+
+  .intro-layout-right .intro-copy {
+    top: 25vh;
+  }
+
+  /*
+   * FINAL INTRODUCTION PANEL
+   *
+   * IMPORTANT:
+   * This used to be max-width: 18vw.
+   * That was causing the text to be squeezed on phones.
+   */
+
+  .intro-layout-bottom .intro-copy {
+    left: 6vw;
+    bottom: 20vh;
+
+    width: 88vw;
+    max-width: 88vw;
+
+    overflow: visible;
+  }
+
+
+  /* -------------------------------------------------------
+     INTRO GEOMETRY
+  ------------------------------------------------------- */
+
+  .intro-geo-shape-one {
+    width: 260px;
+    height: 170px;
+
+    right: -130px;
+    top: 8%;
+  }
+
+  .intro-geo-shape-two {
+    width: 130px;
+    height: 280px;
+
+    right: 5%;
+    top: 35%;
+  }
+
+  .intro-geo-shape-three {
+    width: 180px;
+    height: 180px;
+
+    right: -70px;
+    top: 55%;
+  }
+
+  .intro-geo-shape-four {
+    width: 110px;
+    height: 110px;
+
+    right: 15%;
+    bottom: 10%;
+  }
+
+  .intro-geo-line-one {
+    width: 55vw;
+
+    right: -10vw;
+    top: 25%;
+  }
+
+  .intro-geo-line-two {
+    width: 45vw;
+
+    right: -5vw;
+    top: 50%;
+  }
+
+  .intro-geo-line-three {
+    width: 50vw;
+
+    right: -10vw;
+    top: 70%;
+  }
+
+  .intro-geo-line-four {
+    width: 30vw;
+
+    right: 15%;
+    bottom: 15%;
+  }
+
+
+  /* -------------------------------------------------------
+     SELECTED WORK
+  ------------------------------------------------------- */
+
+  .intro-project-cue {
+    left: 18px;
+    bottom: 20px;
+
+    font-size: 14px;
+
+    gap: 8px;
+  }
+
+  .intro-project-arrow {
     font-size: 18px;
   }
 
-  .footer-coding {
-    left: 18px;
-    right: auto;
-    bottom: 72px;
 
-    width: calc(
-      100vw - 36px
-    );
+  /* -------------------------------------------------------
+     SCROLL
+  ------------------------------------------------------- */
+
+  .intro-scroll {
+    right: 18px;
+    bottom: 20px;
+
+    font-size: 13px;
+  }
+
+
+  /* =======================================================
+     PROJECTS
+  ======================================================= */
+
+  .projects-stage {
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+  }
+
+  .projects-header {
+    left: 18px;
+    top: 20px;
+
+    font-size: 14px;
+  }
+
+  .projects-track {
+    height: 100%;
+  }
+
+  .project-slide {
+    position: relative;
+
+    width: 100vw;
+    height: 100vh;
+
+    overflow: hidden;
+  }
+
+
+  /* -------------------------------------------------------
+     PROJECT NUMBER
+  ------------------------------------------------------- */
+
+  .project-number {
+    left: 18px;
+    top: 12vh;
+
+    font-size: 22px;
+
+    z-index: 20;
+  }
+
+
+  /* -------------------------------------------------------
+     PROJECT VISUAL
+  ------------------------------------------------------- */
+
+  .project-visual {
+    position: absolute;
+
+    left: 6vw;
+    top: 20vh;
+
+    width: 88vw;
+    height: 30vh;
+
+    z-index: 1;
+
+    overflow: visible;
+  }
+
+
+  /*
+   * Project image must stay inside the visual area.
+   * It no longer competes with the project information.
+   */
+
+  .project-image {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: contain;
+
+    z-index: 1;
+  }
+
+
+  /* -------------------------------------------------------
+     PROJECT INFORMATION
+  ------------------------------------------------------- */
+
+  .project-info {
+    position: absolute;
+
+    left: 6vw;
+    right: auto;
+
+    top: 53vh;
+    
+    width: 88vw;
+    max-width: 88vw;
+
+    z-index: 10;
+  }
+
+  .project-kicker {
+    margin-bottom: 10px;
+
+    font-size: 14px;
+  }
+
+  .project-info h2 {
+    margin: 0 0 18px;
+
+    font-size: 11vw;
+
+    line-height: 0.82;
+
+    letter-spacing: -0.03em;
+  }
+
+  .project-info p {
+    width: 100%;
+
+    margin: 0 0 20px;
+
+    font-size: 20px;
+
+    line-height: 1.05;
+
+    overflow-wrap: break-word;
+    word-break: normal;
+  }
+
+  .project-features {
+    gap: 5px;
+
+    margin-bottom: 24px;
+
+    font-size: 18px;
+  }
+
+  .project-features span {
+    padding-top: 6px;
+
+    white-space: normal;
+    overflow-wrap: break-word;
+  }
+
+  .project-view {
+    font-size: 20px;
+  }
+
+  .project-view span {
+    font-size: 24px;
+  }
+
+
+  /* -------------------------------------------------------
+     PROJECT GEOMETRY
+  ------------------------------------------------------- */
+
+  .project-object-main {
+    width: 65vw;
+    height: 48vw;
+
+    left: 10vw;
+    top: 4vh;
+  }
+
+  .project-object-small {
+    width: 22vw;
+    height: 22vw;
+
+    left: 60vw;
+    top: 0;
+  }
+
+  .project-object-tilted {
+    width: 25vw;
+    height: 38vw;
+
+    left: 4vw;
+    bottom: 0;
+  }
+
+  .project-wire-one {
+    width: 30vw;
+
+    left: 0;
+    top: 10vh;
+  }
+
+  .project-wire-two {
+    width: 25vw;
+
+    left: 60vw;
+    top: 22vh;
+  }
+
+  .project-wire-three {
+    width: 18vw;
+
+    left: 15vw;
+    top: 35vh;
+  }
+
+
+  /* -------------------------------------------------------
+     PROJECT BOTTOM LABEL
+  ------------------------------------------------------- */
+
+  .project-bottom-label {
+    left: 18px;
+    bottom: 20px;
+
+    font-size: 15px;
+  }
+
+
+  /* =======================================================
+     PROJECT LIGHTBOX
+  ======================================================= */
+
+  .project-lightbox {
+    padding: 20px;
+
+    overflow: auto;
+
+    align-items: flex-start;
+  }
+
+  .project-lightbox-image {
+    width: 100%;
+    max-width: none;
+
+    height: auto;
+  }
+
+  .project-lightbox-close {
+    top: 16px;
+    right: 18px;
+
+    font-size: 30px;
+  }
+
+
+  /* =======================================================
+     FOOTER / CONTACT
+  ======================================================= */
+
+  .footer-section {
+    width: 100vw;
+
+    min-height: 100vh;
+
+    padding:
+      22px 18px 22px;
+
+    overflow: hidden;
+  }
+
+  .footer-label {
+    font-size: 18px;
+  }
+
+
+  /* -------------------------------------------------------
+     FOOTER GEOMETRY
+  ------------------------------------------------------- */
+
+  .footer-geo-large {
+    width: 260px;
+    height: 170px;
+
+    right: -150px;
+    top: 10%;
+  }
+
+  .footer-geo-tall {
+    width: 120px;
+    height: 250px;
+
+    right: -10%;
+    bottom: -80px;
+  }
+
+  .footer-geo-diamond {
+    width: 140px;
+    height: 140px;
+
+    right: -15%;
+    bottom: 25%;
+  }
+
+  .footer-geo-line-one {
+    width: 55vw;
+
+    right: -10vw;
+  }
+
+  .footer-geo-line-two {
+    width: 45vw;
+
+    right: -5vw;
+  }
+
+  .footer-geo-line-three {
+    width: 35vw;
+
+    right: 5vw;
+  }
+
+
+  /* -------------------------------------------------------
+     FOOTER INTRO
+  ------------------------------------------------------- */
+
+  .footer-intro {
+    position: relative;
+
+    margin-top: 10vh;
+
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .footer-intro-main {
+    width: 100%;
+
+    font-size: 24vw;
+
+    line-height: 0.82;
+
+    letter-spacing: -0.035em;
+
+    white-space: normal;
+  }
+
+  .footer-intro-sub {
+    margin-top: 24px;
+
+    width: 85vw;
+    max-width: 85vw;
+
+    font-size: 24px;
+
+    line-height: 1.1;
+  }
+
+
+  /* -------------------------------------------------------
+     PRIMARY CONTACT LINKS
+  ------------------------------------------------------- */
+
+  .footer-primary-links {
+    position: relative;
+
+    left: auto;
+    bottom: auto;
+
+    width: 100%;
+    max-width: 100%;
+
+    display: grid;
+
+    grid-template-columns:
+      1fr 1fr;
+
+    gap: 18px 20px;
+
+    margin-top: 5vh;
+
+    z-index: 5;
+  }
+
+  .footer-link {
+    min-width: 0;
+
+    white-space: nowrap;
+  }
+
+  .footer-link-large {
+    font-size: 22px;
+  }
+
+
+  /* -------------------------------------------------------
+     CODING PROFILES
+  ------------------------------------------------------- */
+
+  .footer-coding {
+    position: relative;
+
+    left: auto;
+    right: auto;
+    bottom: auto;
+
+    width: 100%;
+    max-width: 100%;
+
+    margin-top: 6vh;
+
+    z-index: 5;
+  }
+
+  .footer-coding-label {
+    margin-bottom: 14px;
+
+    font-size: 24px;
+
+    letter-spacing: 0.05em;
   }
 
   .footer-coding-links {
+    display: grid;
+
     grid-template-columns:
       1fr 1fr;
+
+    gap: 16px 20px;
   }
+
+  .footer-link-small {
+    font-size: 19px;
+  }
+
+
+  /* -------------------------------------------------------
+     RESUME
+  ------------------------------------------------------- */
 
   .footer-resume {
     right: 18px;
     top: 22px;
 
-    font-size: 13px;
+    font-size: 19px;
   }
 
+  .footer-resume span {
+    margin-left: 5px;
+  }
+
+
+  /* -------------------------------------------------------
+     FOOTER BOTTOM
+  ------------------------------------------------------- */
+
   .footer-bottom {
+    position: absolute;
+
     left: 18px;
     right: 18px;
     bottom: 18px;
 
-    font-size: 9px;
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    font-size: 14px;
+
+    white-space: nowrap;
   }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+========================================================= */
+
+@media (max-width: 380px) {
+
+  .prototype-iam {
+    font-size: 24px;
+  }
+
+  .prototype-name {
+    left: 14px;
+
+    width: calc(100vw - 28px);
+
+    font-size: 28vw;
+  }
+
+  .intro-panel {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .intro-copy {
+    width: calc(100vw - 28px);
+    max-width: calc(100vw - 28px);
+
+    font-size: 15vw;
+  }
+
+  .intro-layout-bottom .intro-copy {
+    left: 5vw;
+
+    width: 90vw;
+    max-width: 90vw;
+  }
+
+  .intro-project-cue {
+    left: 14px;
+  }
+
+  .intro-scroll {
+    right: 14px;
+  }
+
+  .project-info {
+    left: 5vw;
+
+    width: 90vw;
+    max-width: 90vw;
+
+    top: 52vh;
+  }
+
+  .project-info h2 {
+    font-size: 10vw;
+  }
+
+  .project-info p {
+    font-size: 14px;
+  }
+
+  .project-features {
+    font-size: 13px;
+  }
+
+  .project-visual {
+    left: 5vw;
+
+    width: 90vw;
+  }
+
+  .footer-section {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .footer-intro-main {
+    font-size: 16vw;
+  }
+
+  .footer-primary-links {
+    gap: 16px 14px;
+  }
+
+  .footer-link-large {
+    font-size: 16px;
+  }
+
+  .footer-coding-links {
+    gap: 14px;
+  }
+
+  .footer-link-small {
+    font-size: 13px;
+  }
+
+  .footer-bottom {
+    left: 14px;
+    right: 14px;
+  }
+}
+
+
+/* =========================================================
+   INTRODUCTION — MOBILE POSITIONING
+========================================================= */
+
+@media (max-width: 768px) {
+
+  .intro-layout-left .intro-copy {
+    left: 18px;
+    top: 25vh;
+
+    width: calc(100vw - 36px);
+  }
+
+  .intro-layout-wide .intro-copy {
+    left: 18px;
+    top: 25vh;
+
+    width: calc(100vw - 36px);
+  }
+
+  .intro-layout-center .intro-copy {
+    left: 18px;
+    top: 43%;
+
+    width: calc(100vw - 36px);
+
+    transform: translateY(-50%);
+  }
+
+  .intro-layout-right .intro-copy {
+    left: 18px;
+    right: auto;
+    top: 25vh;
+    font-size: 15vw;
+    width: calc(100vw - 36px);
+    max-width: calc(100vw - 36px);
+  }
+
+  .intro-layout-bottom .intro-copy {
+    left: 5vw;
+    top: 25vh;
+
+    width: 90vw;
+  }
+
+  
+
 }
