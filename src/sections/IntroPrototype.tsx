@@ -23,7 +23,8 @@ function IntroPrototype() {
     if (isMobile) {
       ScrollTrigger.normalizeScroll({
         type: "touch",
-        momentum: () => 0,
+        momentum: (self: any) =>
+      Math.min(0.6, Math.abs(self.velocityY) / 4000),
       });
     }
     const scrollHint = section.querySelector<HTMLElement>(
