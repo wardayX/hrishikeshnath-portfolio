@@ -1,4 +1,4 @@
-# HRISHIKESH NATH — PORTFOLIO
+# MY PORTFOLIO
 
 React + TypeScript + Vite • GSAP • GitHub Actions • Vercel
 
