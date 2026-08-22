@@ -91,7 +91,7 @@ The project includes a basic CI/CD workflow so that development and deployment a
 ### Clone the repository
 
 ```bash
-git clone <your-repository-url>
+git clone https://github.com/wardayX/hrishikeshnath-portfolio.git
 cd hrishikesh-portfolio
 ```
 
